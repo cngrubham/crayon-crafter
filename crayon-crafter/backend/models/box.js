@@ -4,6 +4,7 @@ const boxSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    default: "Unnamed Box",
   },
   crayons: [
     {

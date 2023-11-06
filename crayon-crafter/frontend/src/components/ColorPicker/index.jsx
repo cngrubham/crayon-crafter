@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import iro from '@jaames/iro';
 
-function ColorPicker() {
-  const [color, setColor] = useState('#ff0000'); 
+function ColorPicker({ onColorSelect }) {
+  const [color, setColor] = useState('#ff0000');
+  const colorPickerRef = useRef(null);
 
   useEffect(() => {
-    const colorPicker = new iro.ColorPicker('#color-picker-container', {
-      width: 200,
-      color: color, 
-    });
+    if (!colorPickerRef.current) {
+      colorPickerRef.current = new iro.ColorPicker('#color-picker-container', {
+        width: 200,
+        color: color,
+      });
 
-    colorPicker.on('input:end', (color) => {
-      const hexColor = color.hexString;
-      setColor(hexColor);
-    });
+      colorPickerRef.current.on('input:end', (newColor) => {
+        const hexColor = newColor.hexString;
+        setColor(hexColor);
+        onColorSelect(hexColor);
+      });
+    }
 
     return () => {
-      colorPicker.off('input:end');
-      colorPicker.destroy();
     };
-  }, []);
+  }, [color, onColorSelect]);
 
   return (
     <div>

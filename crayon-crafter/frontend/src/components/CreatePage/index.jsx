@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ColorPicker from '../ColorPicker';
 import CrayonComponent from '../Crayon';
 import BoxComponent from '../Box';
+import { createCrayon, createBox } from '../../../utils/backend';
 
 const CreatePage = () => {
   const [selectedColor, setSelectedColor] = useState('#ff0000');
@@ -20,6 +21,15 @@ const CreatePage = () => {
     setSelectedCrayons([...selectedCrayons, { hexCode }]);
   };
 
+//   const handleCreateCrayon = (hexCode) => {
+    
+//     createCrayon({ hexCode })
+//       .then((createdCrayon) => {
+//         setSelectedCrayons([...selectedCrayons, createdCrayon]);
+//       })
+//       .catch((error) => console.error('Error creating crayon:', error));
+//   };
+
   const handleSaveBox = () => {
     setSelectedCrayons([]);
     setIsBoxFull(false);
@@ -29,7 +39,7 @@ const CreatePage = () => {
     <div>
       <h2>Create Your Crayon</h2>
       <ColorPicker onColorSelect={handleColorSelect} />
-      <CrayonComponent hexCode={selectedColor} onCreateCrayon={handleCreateCrayon} />
+      <CrayonComponent hexCode={selectedColor} onCreateCrayon={handleCreateCrayon} isBoxFull={isBoxFull} />
       <BoxComponent selectedCrayons={selectedCrayons} onSaveBox={handleSaveBox} isBoxFull={isBoxFull} />
     </div>
   );
