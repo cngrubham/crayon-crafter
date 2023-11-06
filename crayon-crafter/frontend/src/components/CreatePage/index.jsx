@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ColorPicker from '../ColorPicker';
 import CrayonComponent from '../Crayon';
-import BoxComponent from './box/index';
+import BoxComponent from '../Box';
 
 const CreatePage = () => {
   const [selectedColor, setSelectedColor] = useState('#ff0000');
