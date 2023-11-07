@@ -5,6 +5,20 @@ const BoxComponent = ({ selectedCrayons, onSaveBox, isBoxFull, boxName }) => {
     onSaveBox(selectedCrayons);
   };
 
+
+  const handleEditBoxName = () => {
+    
+  };
+  
+  const handleEditBoxCrayons = () => {
+   
+  };
+  
+  const handleDeleteBox = () => {
+   
+  };
+
+
   return (
     <div>
       <h3>Crayon Box</h3>

@@ -9,6 +9,13 @@ const CrayonComponent = ({ hexCode, onCreateCrayon, isBoxFull }) => {
       setCrayonName(''); 
     }
   };
+  const handleEditCrayon = () => {
+   
+  };
+  
+  const handleDeleteCrayon = () => {
+   
+  };
 
   return (
     <div>
