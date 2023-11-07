@@ -4,8 +4,10 @@ const CrayonComponent = ({ hexCode, onCreateCrayon, isBoxFull }) => {
   const [crayonName, setCrayonName] = useState('');
 
   const handleCreateCrayon = () => {
-    onCreateCrayon(hexCode, crayonName);
-    setCrayonName('');
+    if (crayonName.trim() !== '') { 
+      onCreateCrayon(hexCode, crayonName);
+      setCrayonName(''); 
+    }
   };
 
   return (

@@ -19,7 +19,7 @@ const CreatePage = () => {
   };
 
   const handleCreateCrayon = (hexCode, crayonName) => {
-    createCrayon({ hexCode, name: crayonName })
+    createCrayon({ hexCode, crayonName: crayonName })
       .then((createdCrayon) => {
         setSelectedCrayons([...selectedCrayons, createdCrayon]);
       })
@@ -28,7 +28,7 @@ const CreatePage = () => {
 
   const handleCreateBox = () => {
     const boxData = {
-      name: boxName,
+      boxName: boxName,
       crayons: selectedCrayons,
     };
 
