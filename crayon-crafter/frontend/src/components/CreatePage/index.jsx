@@ -18,19 +18,27 @@ const CreatePage = () => {
   };
 
   const handleCreateCrayon = (hexCode) => {
-    setSelectedCrayons([...selectedCrayons, { hexCode }]);
+    createCrayon({ hexCode })
+      .then((createdCrayon) => {
+        setSelectedCrayons([...selectedCrayons, createdCrayon]);
+      })
+      .catch((error) => console.error('Error creating crayon:', error));
+  };
+  
+
+  const handleCreateBox = () => {
+    const boxData = {
+      crayons: selectedCrayons,
+    };
+
+    createBox(boxData)
+      .then((createdBox) => {
+      })
+      .catch((error) => console.error('Error creating box:', error));
   };
 
-//   const handleCreateCrayon = (hexCode) => {
-    
-//     createCrayon({ hexCode })
-//       .then((createdCrayon) => {
-//         setSelectedCrayons([...selectedCrayons, createdCrayon]);
-//       })
-//       .catch((error) => console.error('Error creating crayon:', error));
-//   };
-
   const handleSaveBox = () => {
+    handleCreateBox();
     setSelectedCrayons([]);
     setIsBoxFull(false);
   };
