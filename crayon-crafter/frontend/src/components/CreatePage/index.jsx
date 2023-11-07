@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import ColorPicker from '../ColorPicker';
-import CrayonComponent from '../Crayon';
-import BoxComponent from '../Box';
-import { createCrayon, createBox } from '../../../utils/backend';
+import React, { useState, useEffect } from "react";
+import ColorPicker from "../ColorPicker";
+import CrayonComponent from "../Crayon";
+import BoxComponent from "../Box";
+import { createCrayon, createBox } from "../../../utils/backend";
 
 const CreatePage = () => {
-  const [selectedColor, setSelectedColor] = useState('#ff0000');
+  const [selectedColor, setSelectedColor] = useState("#ff0000");
   const [selectedCrayons, setSelectedCrayons] = useState([]);
+  const [boxName, setBoxName] = useState("");
   const [isBoxFull, setIsBoxFull] = useState(false);
 
   useEffect(() => {
@@ -22,20 +23,20 @@ const CreatePage = () => {
       .then((createdCrayon) => {
         setSelectedCrayons([...selectedCrayons, createdCrayon]);
       })
-      .catch((error) => console.error('Error creating crayon:', error));
+      .catch((error) => console.error("Error creating crayon:", error));
   };
-  
-  
 
   const handleCreateBox = () => {
     const boxData = {
+      name: boxName,
       crayons: selectedCrayons,
     };
 
     createBox(boxData)
       .then((createdBox) => {
+        setBoxName("");
       })
-      .catch((error) => console.error('Error creating box:', error));
+      .catch((error) => console.error("Error creating box:", error));
   };
 
   const handleSaveBox = () => {
@@ -48,8 +49,22 @@ const CreatePage = () => {
     <div>
       <h2>Create Your Crayon</h2>
       <ColorPicker onColorSelect={handleColorSelect} />
-      <CrayonComponent hexCode={selectedColor} onCreateCrayon={handleCreateCrayon} isBoxFull={isBoxFull} />
-      <BoxComponent selectedCrayons={selectedCrayons} onSaveBox={handleSaveBox} isBoxFull={isBoxFull} />
+      <CrayonComponent
+        hexCode={selectedColor}
+        onCreateCrayon={handleCreateCrayon}
+        isBoxFull={isBoxFull}
+      />
+      <input
+        type="text"
+        placeholder="Enter Box Name"
+        value={boxName}
+        onChange={(e) => setBoxName(e.target.value)}
+      />
+      <BoxComponent
+        selectedCrayons={selectedCrayons}
+        onSaveBox={handleSaveBox}
+        isBoxFull={isBoxFull}
+      />
     </div>
   );
 };

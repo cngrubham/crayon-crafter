@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const boxSchema = new mongoose.Schema({
-  name: {
+  boxName: {
     type: String,
     required: true,
     default: "Unnamed Box",

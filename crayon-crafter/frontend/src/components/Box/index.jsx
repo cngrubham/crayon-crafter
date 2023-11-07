@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const BoxComponent = ({ selectedCrayons, onSaveBox, isBoxFull }) => {
+const BoxComponent = ({ selectedCrayons, onSaveBox, isBoxFull, boxName }) => {
   const handleSaveBox = () => {
     onSaveBox(selectedCrayons);
   };
@@ -9,8 +9,16 @@ const BoxComponent = ({ selectedCrayons, onSaveBox, isBoxFull }) => {
     <div>
       <h3>Crayon Box</h3>
       {selectedCrayons.map((crayon, index) => (
-        <div key={index} style={{ backgroundColor: crayon.hexCode, width: '300px', height: '50px' }}></div>
+        <div
+          key={index}
+          style={{
+            backgroundColor: crayon.hexCode,
+            width: "300px",
+            height: "50px",
+          }}
+        ></div>
       ))}
+      {boxName && <p>Box Name: {boxName}</p>}
       {isBoxFull ? (
         <button onClick={handleSaveBox}>Save Box</button>
       ) : (
