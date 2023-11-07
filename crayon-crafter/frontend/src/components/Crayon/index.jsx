@@ -1,25 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { updateCrayon, deleteCrayon } from "../../../utils/backend";
 
-const CrayonComponent = ({ hexCode, onCreateCrayon, isBoxFull }) => {
-  const [crayonName, setCrayonName] = useState('');
+const CrayonComponent = ({
+  hexCode,
+  onCreateCrayon,
+  isBoxFull,
+  selectedCrayons,
+  setSelectedCrayons,
+}) => {
+  const [crayonName, setCrayonName] = useState("");
+
+  const [editCrayonId, setEditCrayonId] = useState(null);
+  const [editCrayonName, setEditCrayonName] = useState("");
+  const [editCrayonColor, setEditCrayonColor] = useState("");
 
   const handleCreateCrayon = () => {
-    if (crayonName.trim() !== '') { 
-      onCreateCrayon(hexCode, crayonName);
-      setCrayonName(''); 
+    const defaultCrayonName = "Unnamed Crayon";
+    const finalCrayonName = crayonName.trim() || defaultCrayonName;
+    onCreateCrayon(hexCode, finalCrayonName);
+    setCrayonName("");
+  };
+
+  const handleEditCrayon = (id) => {
+    const updatedName = prompt(
+      "Enter the new name for the crayon:",
+      crayonName
+    );
+    if (updatedName !== null) {
+      const updatedCrayons = selectedCrayons.map((crayon) =>
+        crayon.id === id ? { ...crayon, name: updatedName } : crayon
+      );
+      setSelectedCrayons(updatedCrayons);
     }
   };
-  const handleEditCrayon = () => {
-   
-  };
-  
-  const handleDeleteCrayon = () => {
-   
+
+  const handleDeleteCrayon = (id) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this crayon?"
+    );
+    if (isConfirmed) {
+      deleteCrayon(id)
+        .then(() => {
+          const updatedCrayons = selectedCrayons.filter(
+            (crayon) => crayon.id !== id
+          );
+          setSelectedCrayons(updatedCrayons);
+        })
+        .catch((error) => console.error("Error deleting crayon:", error));
+    }
   };
 
   return (
     <div>
-      <div style={{ backgroundColor: hexCode, width: '50px', height: '50px' }}></div>
+      <div
+        style={{ backgroundColor: hexCode, width: "50px", height: "50px" }}
+      ></div>
       {isBoxFull ? (
         <p>Box is Full</p>
       ) : (

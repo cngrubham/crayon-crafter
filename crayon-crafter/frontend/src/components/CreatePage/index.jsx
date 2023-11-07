@@ -27,11 +27,13 @@ const CreatePage = () => {
   };
 
   const handleCreateBox = () => {
+    const defaultBoxName = 'Unnamed Box';
+    const finalBoxName = boxName.trim() || defaultBoxName;
     const boxData = {
-      boxName: boxName,
+      boxName: finalBoxName,
       crayons: selectedCrayons,
     };
-
+  
     createBox(boxData)
       .then((createdBox) => {
         setBoxName("");
