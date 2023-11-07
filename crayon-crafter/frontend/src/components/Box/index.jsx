@@ -9,7 +9,7 @@ const BoxComponent = ({ selectedCrayons, onSaveBox, isBoxFull }) => {
     <div>
       <h3>Crayon Box</h3>
       {selectedCrayons.map((crayon, index) => (
-        <div key={index} style={{ backgroundColor: crayon.hexCode, width: '50px', height: '50px' }}></div>
+        <div key={index} style={{ backgroundColor: crayon.hexCode, width: '300px', height: '50px' }}></div>
       ))}
       {isBoxFull ? (
         <button onClick={handleSaveBox}>Save Box</button>

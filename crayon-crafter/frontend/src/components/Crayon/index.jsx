@@ -1,6 +1,11 @@
+import React, { useState } from 'react';
+
 const CrayonComponent = ({ hexCode, onCreateCrayon, isBoxFull }) => {
+  const [crayonName, setCrayonName] = useState('');
+
   const handleCreateCrayon = () => {
-    onCreateCrayon(hexCode);
+    onCreateCrayon(hexCode, crayonName);
+    setCrayonName('');
   };
 
   return (
@@ -9,7 +14,15 @@ const CrayonComponent = ({ hexCode, onCreateCrayon, isBoxFull }) => {
       {isBoxFull ? (
         <p>Box is Full</p>
       ) : (
-        <button onClick={handleCreateCrayon}>Create Crayon</button>
+        <div>
+          <input
+            type="text"
+            placeholder="Enter Crayon Name"
+            value={crayonName}
+            onChange={(e) => setCrayonName(e.target.value)}
+          />
+          <button onClick={handleCreateCrayon}>Create Crayon</button>
+        </div>
       )}
     </div>
   );

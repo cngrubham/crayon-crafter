@@ -17,13 +17,14 @@ const CreatePage = () => {
     setSelectedColor(color);
   };
 
-  const handleCreateCrayon = (hexCode) => {
-    createCrayon({ hexCode })
+  const handleCreateCrayon = (hexCode, crayonName) => {
+    createCrayon({ hexCode, name: crayonName })
       .then((createdCrayon) => {
         setSelectedCrayons([...selectedCrayons, createdCrayon]);
       })
       .catch((error) => console.error('Error creating crayon:', error));
   };
+  
   
 
   const handleCreateBox = () => {

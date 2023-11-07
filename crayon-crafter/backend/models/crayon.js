@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const crayonSchema = new mongoose.Schema({
-  name: {
+  crayonName: {
     type: String,
     required: true,
     default: "Unnamed Crayon",
