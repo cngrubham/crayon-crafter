@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { createCrayon, updateCrayon, deleteCrayon } from "../../../utils/backend";
+import { updateCrayon, deleteCrayon } from "../../../utils/backend";
+import CrayonDisplay from "../CrayonDisplay";
 
 const CrayonComponent = ({
   hexCode,
@@ -14,7 +15,7 @@ const CrayonComponent = ({
     crayonName: "",
   });
   const [editIndex, setEditIndex] = useState(-1);
- 
+
   const handleCreateCrayon = () => {
     const defaultCrayonName = "Unnamed Crayon";
     const finalCrayonName = crayonData.crayonName.trim() || defaultCrayonName;
@@ -31,19 +32,23 @@ const CrayonComponent = ({
       crayonName: "",
     });
   };
-
-  const handleEditCrayon = (index) => {
+  const toggleCrayonEdit = (index) => {
     setEditIndex(index);
+  };
+  const handleEditCrayon = (index) => {
     const selectedCrayon = selectedCrayons[index];
-    setCrayonData({
+    console.log(selectedCrayon);
+    const crayonUpdateInfo = {
       id: selectedCrayon.id,
       crayonName: selectedCrayon.crayonName,
-    });
+    };
+    setCrayonData(crayonUpdateInfo);
+    updateCrayon(selectedCrayon.id, crayonUpdateInfo);
   };
 
   const handleDeleteCrayon = (id) => {
     console.log("Deleting crayon with id:", id);
-    handleDeleteCrayonProp(id); 
+    handleDeleteCrayonProp(id);
   };
 
   return (
@@ -71,31 +76,16 @@ const CrayonComponent = ({
       <ul>
         {selectedCrayons &&
           selectedCrayons.map((crayon, index) => (
-            <li key={index}>
-              {editIndex === index ? (
-                <input
-                  type="text"
-                  value={crayonData.crayonName}
-                  onChange={(e) =>
-                    setCrayonData({ ...crayonData, crayonName: e.target.value })
-                  }
-                />
-              ) : (
-                crayon.crayonName
-              )}
-              {editIndex === index ? (
-                <button onClick={handleCreateCrayon}>Save</button>
-              ) : (
-                <>
-                  <button onClick={() => handleDeleteCrayon(crayon.id)}>
-                    Delete
-                  </button>
-                  <button onClick={() => handleEditCrayon(index)}>
-                    {editIndex === index ? "Save" : "Edit"}
-                  </button>
-                </>
-              )}
-            </li>
+            <CrayonDisplay
+              key={index}
+              crayon={crayon}
+              handleEditCrayon={handleEditCrayon}
+              handleDeleteCrayon={handleDeleteCrayon}
+              crayonData={crayonData}
+              setCrayonData={setCrayonData}
+              editIndex={editIndex}
+              index={index}
+            />
           ))}
       </ul>
     </div>

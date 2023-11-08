@@ -1,23 +1,36 @@
-
-
-const CrayonDisplay = ({ crayons, onEditCrayon, onDeleteCrayon }) => {
+const CrayonDisplay = ({
+  crayon,
+  handleEditCrayon,
+  handleDeleteCrayon,
+  crayonData,
+  setCrayonData,
+  editIndex,
+  index,
+}) => {
   return (
-    <div>
-      {crayons.map((crayon) => (
-        <div
-          key={crayon.id}
-          style={{
-            backgroundColor: crayon.hexCode,
-            width: "300px",
-            height: "50px",
-          }}
-        >
-          {crayon.crayonName}
-          <button onClick={() => onEditCrayon(crayon.id)}>Edit</button>
-          <button onClick={() => onDeleteCrayon(crayon.id)}>Delete</button>
-        </div>
-      ))}
-    </div>
+    <li>
+      {editIndex === index ? (
+        <input
+          type="text"
+          value={crayonData.crayonName}
+          onChange={(e) =>
+            setCrayonData({ ...crayonData, crayonName: e.target.value })
+          }
+        />
+      ) : (
+        crayon.crayonName
+      )}
+      {editIndex === index ? (
+        <button onClick={handleCreateCrayon}>Save</button>
+      ) : (
+        <>
+          <button onClick={() => handleDeleteCrayon(crayon.id)}>Delete</button>
+          <button onClick={() => handleEditCrayon(index)}>
+            {editIndex === index ? "Save" : "Edit"}
+          </button>
+        </>
+      )}
+    </li>
   );
 };
 

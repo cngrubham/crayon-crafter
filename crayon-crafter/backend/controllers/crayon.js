@@ -21,6 +21,8 @@ router.post("/", (req, res) => {
 
 // Update Route (PUT/Update): Update a specific crayon by ID
 router.put("/:id", (req, res) => {
+  console.log(req.params.id)
+  console.log(req.body)
   db.Crayon.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
     (crayon) => res.json(crayon)
   );
