@@ -27,13 +27,13 @@ const CreatePage = () => {
   };
 
   const handleCreateBox = () => {
-    const defaultBoxName = 'Unnamed Box';
+    const defaultBoxName = "Unnamed Box";
     const finalBoxName = boxName.trim() || defaultBoxName;
     const boxData = {
       boxName: finalBoxName,
       crayons: selectedCrayons,
     };
-  
+
     createBox(boxData)
       .then((createdBox) => {
         setBoxName("");
@@ -48,24 +48,29 @@ const CreatePage = () => {
   };
 
   return (
-    <div>
-      <h2>Create Your Crayon</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h2 className="text-2xl mb-4">Create Your Crayon</h2>
       <ColorPicker onColorSelect={handleColorSelect} />
       <CrayonComponent
         hexCode={selectedColor}
         onCreateCrayon={handleCreateCrayon}
         isBoxFull={isBoxFull}
+        selectedCrayons={selectedCrayons}
+        setSelectedCrayons={setSelectedCrayons}
       />
       <input
         type="text"
         placeholder="Enter Box Name"
         value={boxName}
         onChange={(e) => setBoxName(e.target.value)}
+        className="border p-2 rounded mb-4"
       />
       <BoxComponent
         selectedCrayons={selectedCrayons}
         onSaveBox={handleSaveBox}
         isBoxFull={isBoxFull}
+        boxName={boxName}
+        setBoxName={setBoxName}
       />
     </div>
   );

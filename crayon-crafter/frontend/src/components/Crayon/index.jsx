@@ -1,53 +1,31 @@
 import React, { useState } from "react";
-import { updateCrayon, deleteCrayon } from "../../../utils/backend";
 
 const CrayonComponent = ({
   hexCode,
   onCreateCrayon,
   isBoxFull,
   selectedCrayons,
-  setSelectedCrayons,
 }) => {
   const [crayonName, setCrayonName] = useState("");
-
-  const [editCrayonId, setEditCrayonId] = useState(null);
-  const [editCrayonName, setEditCrayonName] = useState("");
-  const [editCrayonColor, setEditCrayonColor] = useState("");
+  const [editIndex, setEditIndex] = useState(-1);
 
   const handleCreateCrayon = () => {
     const defaultCrayonName = "Unnamed Crayon";
     const finalCrayonName = crayonName.trim() || defaultCrayonName;
-    onCreateCrayon(hexCode, finalCrayonName);
+
+    if (editIndex === -1) {
+      onCreateCrayon(hexCode, finalCrayonName);
+    } else {
+      selectedCrayons[editIndex].crayonName = finalCrayonName;
+      setEditIndex(-1);
+    }
+
     setCrayonName("");
   };
 
-  const handleEditCrayon = (id) => {
-    const updatedName = prompt(
-      "Enter the new name for the crayon:",
-      crayonName
-    );
-    if (updatedName !== null) {
-      const updatedCrayons = selectedCrayons.map((crayon) =>
-        crayon.id === id ? { ...crayon, name: updatedName } : crayon
-      );
-      setSelectedCrayons(updatedCrayons);
-    }
-  };
-
-  const handleDeleteCrayon = (id) => {
-    const isConfirmed = window.confirm(
-      "Are you sure you want to delete this crayon?"
-    );
-    if (isConfirmed) {
-      deleteCrayon(id)
-        .then(() => {
-          const updatedCrayons = selectedCrayons.filter(
-            (crayon) => crayon.id !== id
-          );
-          setSelectedCrayons(updatedCrayons);
-        })
-        .catch((error) => console.error("Error deleting crayon:", error));
-    }
+  const handleEditCrayon = (index) => {
+    setEditIndex(index);
+    setCrayonName(selectedCrayons[index].crayonName);
   };
 
   return (
@@ -65,9 +43,32 @@ const CrayonComponent = ({
             value={crayonName}
             onChange={(e) => setCrayonName(e.target.value)}
           />
-          <button onClick={handleCreateCrayon}>Create Crayon</button>
+          <button onClick={handleCreateCrayon}>
+            {editIndex === -1 ? "Create Crayon" : "Update Crayon"}
+          </button>
         </div>
       )}
+      <ul>
+        {selectedCrayons &&
+          selectedCrayons.map((crayon, index) => (
+            <li key={index}>
+              {editIndex === index ? (
+                <input
+                  type="text"
+                  value={crayonName}
+                  onChange={(e) => setCrayonName(e.target.value)}
+                />
+              ) : (
+                crayon.crayonName
+              )}
+              {editIndex === index ? (
+                <button onClick={handleCreateCrayon}>Save</button>
+              ) : (
+                <button onClick={() => handleEditCrayon(index)}>Edit</button>
+              )}
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };

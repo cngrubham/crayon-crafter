@@ -23,7 +23,7 @@ const BoxComponent = ({  selectedCrayons, onSaveBox, isBoxFull, boxName, setBoxN
   return (
     <div>
       <h3>Crayon Box</h3>
-      {selectedCrayons.map((crayon, index) => (
+      {/* {selectedCrayons.map((crayon, index) => (
         <div
           key={index}
           style={{
@@ -36,7 +36,7 @@ const BoxComponent = ({  selectedCrayons, onSaveBox, isBoxFull, boxName, setBoxN
           <button onClick={() => handleEditCrayon(crayon._id)}>Edit</button>
           <button onClick={() => handleDeleteCrayon(crayon._id)}>Delete</button>
         </div>
-      ))}
+      ))} */}
   
       {boxName && <p>Box Name: {boxName}</p>}
       {isBoxFull ? (
