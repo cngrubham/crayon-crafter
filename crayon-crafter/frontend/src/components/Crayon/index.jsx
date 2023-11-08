@@ -1,31 +1,53 @@
 import React, { useState } from "react";
+import { createCrayon, updateCrayon, deleteCrayon } from "../../../utils/backend";
 
 const CrayonComponent = ({
   hexCode,
   onCreateCrayon,
   isBoxFull,
   selectedCrayons,
+  updateCrayon,
+  deleteCrayon,
+  handleDeleteCrayonProp,
+  handleEditCrayonProp,
 }) => {
+  const [crayonData, setCrayonData] = useState({
+    id: null,
+    crayonName: "",
+  });
   const [crayonName, setCrayonName] = useState("");
   const [editIndex, setEditIndex] = useState(-1);
+  const [editMode, setEditMode] = useState(false);
+
 
   const handleCreateCrayon = () => {
     const defaultCrayonName = "Unnamed Crayon";
-    const finalCrayonName = crayonName.trim() || defaultCrayonName;
+    const finalCrayonName = crayonData.crayonName.trim() || defaultCrayonName;
 
     if (editIndex === -1) {
       onCreateCrayon(hexCode, finalCrayonName);
     } else {
-      selectedCrayons[editIndex].crayonName = finalCrayonName;
+      handleEditCrayonProp(crayonData);
       setEditIndex(-1);
     }
 
-    setCrayonName("");
+    setCrayonData({
+      id: null,
+      crayonName: "",
+    });
   };
 
   const handleEditCrayon = (index) => {
     setEditIndex(index);
-    setCrayonName(selectedCrayons[index].crayonName);
+    const selectedCrayon = selectedCrayons[index];
+    setCrayonData({
+      id: selectedCrayon.id,
+      crayonName: selectedCrayon.crayonName,
+    });
+  };
+
+  const handleDeleteCrayon = (crayonId) => {
+    handleDeleteCrayonProp(crayonId);
   };
 
   return (
@@ -40,8 +62,10 @@ const CrayonComponent = ({
           <input
             type="text"
             placeholder="Enter Crayon Name"
-            value={crayonName}
-            onChange={(e) => setCrayonName(e.target.value)}
+            value={crayonData.crayonName}
+            onChange={(e) =>
+              setCrayonData({ ...crayonData, crayonName: e.target.value })
+            }
           />
           <button onClick={handleCreateCrayon}>
             {editIndex === -1 ? "Create Crayon" : "Update Crayon"}
@@ -55,8 +79,10 @@ const CrayonComponent = ({
               {editIndex === index ? (
                 <input
                   type="text"
-                  value={crayonName}
-                  onChange={(e) => setCrayonName(e.target.value)}
+                  value={crayonData.crayonName}
+                  onChange={(e) =>
+                    setCrayonData({ ...crayonData, crayonName: e.target.value })
+                  }
                 />
               ) : (
                 crayon.crayonName
@@ -64,7 +90,14 @@ const CrayonComponent = ({
               {editIndex === index ? (
                 <button onClick={handleCreateCrayon}>Save</button>
               ) : (
-                <button onClick={() => handleEditCrayon(index)}>Edit</button>
+                <>
+                  <button onClick={() => handleDeleteCrayon(crayon.id)}>
+                    Delete
+                  </button>
+                  <button onClick={() => handleEditCrayon(index)}>
+                    {editIndex === index ? "Save" : "Edit"}
+                  </button>
+                </>
               )}
             </li>
           ))}

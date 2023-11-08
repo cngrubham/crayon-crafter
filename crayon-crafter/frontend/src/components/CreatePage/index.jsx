@@ -25,6 +25,27 @@ const CreatePage = () => {
       })
       .catch((error) => console.error("Error creating crayon:", error));
   };
+  const handleEditCrayon = (crayonData) => {
+    const updatedCrayons = selectedCrayons.map((crayon) => {
+      if (crayon.crayonId === crayonData.crayonId) {
+        return {
+          ...crayon,
+          crayonName: crayonData.crayonName,
+        };
+      }
+      return crayon;
+    });
+  
+    setSelectedCrayons(updatedCrayons); 
+  };
+  
+
+  const handleDeleteCrayon = (crayonId) => {
+    const updatedCrayons = selectedCrayons.filter(
+      (crayon) => crayon.id !== crayonId
+    );
+    setSelectedCrayons(updatedCrayons);
+  };
 
   const handleCreateBox = () => {
     const defaultBoxName = "Unnamed Box";
@@ -54,6 +75,9 @@ const CreatePage = () => {
       <CrayonComponent
         hexCode={selectedColor}
         onCreateCrayon={handleCreateCrayon}
+        onDeleteCrayon={handleDeleteCrayon}
+        handleDeleteCrayonProp={handleDeleteCrayon}
+        handleEditCrayonProp={handleEditCrayon}
         isBoxFull={isBoxFull}
         selectedCrayons={selectedCrayons}
         setSelectedCrayons={setSelectedCrayons}
