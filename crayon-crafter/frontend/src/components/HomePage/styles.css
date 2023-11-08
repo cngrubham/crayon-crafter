@@ -1,0 +1,20 @@
+.homepage-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .color-picker {
+    margin: 20px;
+  }
+  
+  .crayon-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .crayon {
+    width: 50px;
+    height: 150px;
+  }
+  

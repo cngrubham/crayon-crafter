@@ -6,20 +6,15 @@ const CrayonComponent = ({
   onCreateCrayon,
   isBoxFull,
   selectedCrayons,
-  updateCrayon,
-  deleteCrayon,
-  handleDeleteCrayonProp,
   handleEditCrayonProp,
+  handleDeleteCrayonProp,
 }) => {
   const [crayonData, setCrayonData] = useState({
     id: null,
     crayonName: "",
   });
-  const [crayonName, setCrayonName] = useState("");
   const [editIndex, setEditIndex] = useState(-1);
-  const [editMode, setEditMode] = useState(false);
-
-
+ 
   const handleCreateCrayon = () => {
     const defaultCrayonName = "Unnamed Crayon";
     const finalCrayonName = crayonData.crayonName.trim() || defaultCrayonName;
@@ -46,8 +41,9 @@ const CrayonComponent = ({
     });
   };
 
-  const handleDeleteCrayon = (crayonId) => {
-    handleDeleteCrayonProp(crayonId);
+  const handleDeleteCrayon = (id) => {
+    console.log("Deleting crayon with id:", id);
+    handleDeleteCrayonProp(id); 
   };
 
   return (

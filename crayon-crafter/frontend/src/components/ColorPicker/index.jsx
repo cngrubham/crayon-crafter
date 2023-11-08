@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import iro from '@jaames/iro';
+import anime from 'animejs';
 
-function ColorPicker({ onColorSelect }) {
+function ColorPicker({ onColorSelect, animationTarget }) {
   const [color, setColor] = useState('#ff0000');
   const colorPickerRef = useRef(null);
+  const animationRef = useRef(null);
 
   useEffect(() => {
     if (!colorPickerRef.current) {
@@ -16,12 +18,27 @@ function ColorPicker({ onColorSelect }) {
         const hexColor = newColor.hexString;
         setColor(hexColor);
         onColorSelect(hexColor);
+
+        if (animationRef.current) {
+          animationRef.current.pause();
+        }
+
+      
+        animationRef.current = anime({
+          targets: animationTarget, 
+          backgroundColor: hexColor,
+          duration: 1000,
+          easing: 'easeOutQuad',
+        });
       });
     }
 
     return () => {
+      if (animationRef.current) {
+        animationRef.current.pause();
+      }
     };
-  }, [color, onColorSelect]);
+  }, [color, onColorSelect, animationTarget]);
 
   return (
     <div>

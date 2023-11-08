@@ -11,12 +11,12 @@ export async function createCrayon(crayon) {
 }
 
 export async function updateCrayon(id, crayon) {
-  const { data } = await axios.put(`/api/crayon/${id}`, { id, crayon });
+  const { data } = await axios.put(`/api/crayon/${id}`,  crayon);
   return data;
 }
 
 export async function deleteCrayon(id) {
-  const { data } = await axios.delete(`/api/crayon/${id}`, { id });
+  const { data } = await axios.delete(`/api/crayon/${id}`);
   return data;
 }
 
@@ -31,11 +31,11 @@ export async function createBox(box) {
 }
 
 export async function updateBox(id, box) {
-  const { data } = await axios.put(`/api/box/${id}`, { id, box });
+  const { data } = await axios.put(`/api/box/${id}`, box);
   return data;
 }
 
 export async function deleteBox(id) {
-  const { data } = await axios.delete(`/api/box/${id}`, { id });
+  const { data } = await axios.delete(`/api/box/${id}`);
   return data;
 }

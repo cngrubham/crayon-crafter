@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ColorPicker from "../ColorPicker";
 import CrayonComponent from "../Crayon";
 import BoxComponent from "../Box";
-import { createCrayon, createBox } from "../../../utils/backend";
+import { createCrayon, createBox, deleteCrayon } from "../../../utils/backend";
 
 const CreatePage = () => {
   const [selectedColor, setSelectedColor] = useState("#ff0000");
@@ -25,9 +25,10 @@ const CreatePage = () => {
       })
       .catch((error) => console.error("Error creating crayon:", error));
   };
-  const handleEditCrayon = (crayonData) => {
+
+  const handleEditCrayon = (id, crayonData) => {
     const updatedCrayons = selectedCrayons.map((crayon) => {
-      if (crayon.crayonId === crayonData.crayonId) {
+      if (crayon.id === id) {
         return {
           ...crayon,
           crayonName: crayonData.crayonName,
@@ -40,11 +41,16 @@ const CreatePage = () => {
   };
   
 
-  const handleDeleteCrayon = (crayonId) => {
-    const updatedCrayons = selectedCrayons.filter(
-      (crayon) => crayon.id !== crayonId
-    );
-    setSelectedCrayons(updatedCrayons);
+  const handleDeleteCrayon = (id) => {
+    console.log("Deleting crayon with id:", id); 
+    deleteCrayon(id)
+      .then(() => {
+        const updatedCrayons = selectedCrayons.filter(
+          (crayon) => crayon.id !== id
+        );
+        setSelectedCrayons(updatedCrayons);
+      })
+      .catch((error) => console.error("Error deleting crayon:", error));
   };
 
   const handleCreateBox = () => {
@@ -73,14 +79,12 @@ const CreatePage = () => {
       <h2 className="text-2xl mb-4">Create Your Crayon</h2>
       <ColorPicker onColorSelect={handleColorSelect} />
       <CrayonComponent
-        hexCode={selectedColor}
-        onCreateCrayon={handleCreateCrayon}
-        onDeleteCrayon={handleDeleteCrayon}
-        handleDeleteCrayonProp={handleDeleteCrayon}
-        handleEditCrayonProp={handleEditCrayon}
-        isBoxFull={isBoxFull}
-        selectedCrayons={selectedCrayons}
-        setSelectedCrayons={setSelectedCrayons}
+       hexCode={selectedColor}
+       onCreateCrayon={handleCreateCrayon}
+       handleDeleteCrayonProp={handleDeleteCrayon}
+       handleEditCrayonProp={handleEditCrayon}
+       isBoxFull={isBoxFull}
+       selectedCrayons={selectedCrayons}
       />
       <input
         type="text"
