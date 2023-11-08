@@ -56,7 +56,7 @@ function HomePage() {
 
   return (
     <div className="homepage-container">
-      <h1>Welcome to the Crayon Gallery</h1>
+      <h1>Welcome to Crayon Crafer</h1>
 
       <div className="crayon-row">
         {Array.from({ length: 10 }).map((_, index) => (
@@ -64,7 +64,9 @@ function HomePage() {
             key={index}
             className="crayon"
             style={{ backgroundColor: adjustColor(selectedColor, index) }}
-          ></div>
+          >
+            <img src="/images/crayon.png" alt="Crayon" />
+          </div>
         ))}
       </div>
       <div className="color-picker">
