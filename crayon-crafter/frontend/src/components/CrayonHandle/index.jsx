@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./styles.css"
 
 const CrayonHandle = ({
   crayon,
@@ -17,6 +18,14 @@ const CrayonHandle = ({
     handleEditCrayonProp(crayon._id, crayonData);
     toggleEditMode();
   };
+
+  const crayonStyle = {
+    width: "50px",
+    height: "200px",
+    borderRadius: "5px",
+    backgroundColor: crayonData.hexCode || crayon.hexCode,
+  };
+
   if (editMode) {
     return (
       <li>
@@ -32,12 +41,33 @@ const CrayonHandle = ({
     );
   }
   return (
-    <li>
-      <p>{crayon.crayonName}</p>
-      <button onClick={handleDelete}>Delete</button>
-      <button onClick={toggleEditMode}>Edit</button>
-    </li>
+    <div>
+      <div>
+        {editMode ? (
+          <div>
+            <input
+              type="text"
+              value={crayonData.crayonName}
+              onChange={(e) =>
+                setCrayonData({ ...crayonData, crayonName: e.target.value })
+              }
+            />
+            <button onClick={handleEdit}>Save</button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={handleDelete}>Delete</button>
+            <button onClick={toggleEditMode}>Edit</button>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
 export default CrayonHandle;
+
+
+
+
+

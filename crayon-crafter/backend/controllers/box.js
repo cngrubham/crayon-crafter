@@ -4,7 +4,7 @@ const db = require("../models");
 
 // Index Route (GET/Read): Retrieve all boxes
 router.get("/", (req, res) => {
-  db.Box.find().then((boxes) => res.json(boxes));
+  db.Box.find().populate('crayons').then((boxes) => res.json(boxes));
 });
 
 // Show Route (GET/Read): Retrieve a specific box by ID

@@ -26,7 +26,7 @@ const BoxGallery = ({}) => {
       console.error("Error refreshing boxes:", error);
     }
   };
-
+console.log(boxes)
   return (
     <div>
       <h1>Box Gallery</h1>

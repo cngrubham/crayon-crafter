@@ -1,0 +1,7 @@
+.crayon-grid {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    width: 70px;
+}

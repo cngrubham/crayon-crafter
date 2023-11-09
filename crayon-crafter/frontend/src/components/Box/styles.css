@@ -1,0 +1,14 @@
+.box-style {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 430px;
+    display: flex;
+    }
+.crayon-grid {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 400px;
+    display: flex;
+    }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { deleteBox, updateBox } from "../../../utils/backend";
 import CrayonDisplay from "../CrayonDisplay";
+import "./styles.css"
 
 const BoxComponent = (props) => {
   const { setBoxName, refreshGallery } = props;
@@ -46,8 +47,8 @@ const BoxComponent = (props) => {
   };
 
   return (
-    <div>
-      <hr />
+    <div className="box-style">
+     
 
       {editMode ? (
         <div>
@@ -63,8 +64,8 @@ const BoxComponent = (props) => {
         <div>
           {boxName && <p>Box Name: {boxName}</p>}
           {crayons && crayons.length > 0 && (
-            <div>
-              <p>Crayons:</p>
+            <div className="crayon-grid">
+              {/* <p>Crayons:</p> */}
               {crayons.map((crayon) => (
                 <CrayonDisplay
                   key={crayon._id}
@@ -75,13 +76,14 @@ const BoxComponent = (props) => {
               ))}
             </div>
           )}
-          <button onClick={handleEditBoxName}>Edit Box Name</button>
-          <button onClick={handleDeleteBox}>Delete Box</button>
+          <button onClick={handleEditBoxName}>Edit</button>
+          <button onClick={handleDeleteBox}>Delete</button>
         </div>
       )}
-      <hr />
+    
     </div>
   );
 };
 
 export default BoxComponent;
+ 
