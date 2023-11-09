@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { deleteBox, updateBox } from "../../../utils/backend";
+import CrayonDisplay from "../CrayonDisplay";
 
 const BoxComponent = (props) => {
   const { setBoxName, refreshGallery } = props;
   const box = props.box || {};
-  const { boxName } = box;
+  const { boxName, crayons } = box;
+  console.log("whats in my box", box);
   const isBoxFull = box.crayons?.length >= 8;
 
   const [editMode, setEditMode] = useState(false);
@@ -60,6 +62,19 @@ const BoxComponent = (props) => {
       ) : (
         <div>
           {boxName && <p>Box Name: {boxName}</p>}
+          {crayons && crayons.length > 0 && (
+            <div>
+              <p>Crayons:</p>
+              {crayons.map((crayon) => (
+                <CrayonDisplay
+                  key={crayon._id}
+                  crayonId={crayon._id}
+                  crayonName={crayon.crayonName}
+                  hexCode={crayon.hexCode}
+                />
+              ))}
+            </div>
+          )}
           <button onClick={handleEditBoxName}>Edit Box Name</button>
           <button onClick={handleDeleteBox}>Delete Box</button>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CrayonDisplay from "../CrayonDisplay";
+import CrayonHandle from "../CrayonHandle";
 
 const CrayonComponent = ({
   hexCode,
@@ -38,7 +38,7 @@ const CrayonComponent = ({
       <ul>
         {selectedCrayons &&
           selectedCrayons.map((crayon, index) => (
-            <CrayonDisplay
+            <CrayonHandle
               key={index}
               crayon={crayon}
               handleEditCrayonProp={handleEditCrayonProp}

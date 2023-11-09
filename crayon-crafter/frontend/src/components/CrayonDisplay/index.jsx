@@ -1,42 +1,13 @@
-import { useState } from "react";
+import React from "react";
 
-const CrayonDisplay = ({
-  crayon,
-  handleEditCrayonProp,
-  handleDeleteCrayonProp,
-}) => {
-  const [crayonData, setCrayonData] = useState(crayon);
-  const [editMode, setEditMode] = useState(false);
-  const toggleEditMode = () => setEditMode(!editMode);
-
-  const handleDelete = () => {
-    handleDeleteCrayonProp(crayon._id);
-  };
-
-  const handleEdit = () => {
-    handleEditCrayonProp(crayon._id, crayonData);
-    toggleEditMode();
-  };
-  if (editMode) {
-    return (
-      <li>
-        <input
-          type="text"
-          value={crayonData.crayonName}
-          onChange={(e) =>
-            setCrayonData({ ...crayonData, crayonName: e.target.value })
-          }
-        />
-        <button onClick={handleEdit}>Save</button>
-      </li>
-    );
-  }
+const CrayonDisplay = ({ crayonId, crayonName, hexCode }) => {
+    console.log(crayonId, crayonName, hexCode)
   return (
-    <li>
-      <p>{crayon.crayonName}</p>
-      <button onClick={handleDelete}>Delete</button>
-      <button onClick={toggleEditMode}>Edit</button>
-    </li>
+    <div>
+      <p>Crayon ID: {crayonId}</p>
+      <p>Crayon Name: {crayonName}</p>
+      <p>Hex Code: {hexCode}</p>
+    </div>
   );
 };
 
