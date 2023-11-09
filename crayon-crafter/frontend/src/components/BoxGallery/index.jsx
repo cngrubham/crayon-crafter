@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BoxComponent from "../Box";
-import {
-  getBoxes, 
-  updateCrayon, 
-  deleteCrayon, 
-} from "../../../utils/backend";
+import { getBoxes } from "../../../utils/backend";
 
-const BoxGallery = ({  }) => {
+const BoxGallery = ({}) => {
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
@@ -20,16 +16,22 @@ const BoxGallery = ({  }) => {
     }
 
     fetchBoxes();
-  }, []); 
+  }, []);
+
+  const refreshGallery = async () => {
+    try {
+      const boxesData = await getBoxes();
+      setBoxes(boxesData);
+    } catch (error) {
+      console.error("Error refreshing boxes:", error);
+    }
+  };
 
   return (
     <div>
       <h1>Box Gallery</h1>
       {boxes.map((box) => (
-        <BoxComponent
-          key={box._id}
-          box={box}
-        />
+        <BoxComponent key={box._id} box={box} refreshGallery={refreshGallery} />
       ))}
     </div>
   );

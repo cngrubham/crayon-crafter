@@ -11,7 +11,7 @@ export async function createCrayon(crayon) {
 }
 
 export async function updateCrayon(id, crayon) {
-  const { data } = await axios.put(`/api/crayon/${id}`,  crayon);
+  const { data } = await axios.put(`/api/crayon/${id}`, crayon);
   return data;
 }
 

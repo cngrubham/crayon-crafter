@@ -1,11 +1,14 @@
 import React from "react";
+import { deleteBox, updateBox } from "../../../utils/backend";
+
 
 const BoxComponent = (props) => {
-  const { onSaveBox, setBoxName } = props;
+  const { onSaveBox, setBoxName, refreshGallery } = props;
   const box = props.box || {};
   const { boxName } = box;
   const isBoxFull = box.crayons?.length >= 8;
   console.log(box);
+
   const handleSaveBox = () => {
     // onSaveBox();
   };
@@ -13,17 +16,21 @@ const BoxComponent = (props) => {
   const handleEditBoxName = () => {
     const updatedName = prompt("Enter the new name for the box:", boxName);
     if (updatedName !== null) {
-      setBoxName(updatedName);
+      updateBox(box._id, { boxName: updatedName }).then(() => {
+        setBoxName(updatedName);
+      });
     }
   };
-
-  const handleEditBoxCrayons = () => {};
+ 
 
   const handleDeleteBox = () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this box?"
     );
     if (isConfirmed) {
+      deleteBox(box._id).then(() => {
+        refreshGallery();
+      });
     }
   };
 
