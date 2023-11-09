@@ -3,21 +3,21 @@ import { deleteBox, updateBox } from "../../../utils/backend";
 
 
 const BoxComponent = (props) => {
-  const { onSaveBox, setBoxName, refreshGallery } = props;
+  const { setBoxName, refreshGallery } = props;
   const box = props.box || {};
   const { boxName } = box;
   const isBoxFull = box.crayons?.length >= 8;
   console.log(box);
 
   const handleSaveBox = () => {
-    // onSaveBox();
+   
   };
 
   const handleEditBoxName = () => {
     const updatedName = prompt("Enter the new name for the box:", boxName);
     if (updatedName !== null) {
       updateBox(box._id, { boxName: updatedName }).then(() => {
-        setBoxName(updatedName);
+        refreshGallery();
       });
     }
   };

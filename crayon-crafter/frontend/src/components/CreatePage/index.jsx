@@ -16,7 +16,7 @@ const CreatePage = () => {
   const [boxName, setBoxName] = useState("");
   const navigate = useNavigate();
   const isBoxFull = selectedCrayons.length >= 8;
-
+  
   const handleColorSelect = (color) => {
     setSelectedColor(color);
   };
@@ -100,7 +100,7 @@ const CreatePage = () => {
         />
       </div>
       {isBoxFull && <button onClick={handleSaveBox}>Create Box</button>}
-      <BoxComponent box={{ crayons: selectedCrayons, boxName }} />
+      <BoxComponent box={{ crayons: selectedCrayons, boxName }} setBoxName={setBoxName} />
     </div>
   );
 };
