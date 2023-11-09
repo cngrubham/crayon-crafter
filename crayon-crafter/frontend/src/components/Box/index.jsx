@@ -1,27 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { deleteBox, updateBox } from "../../../utils/backend";
-
 
 const BoxComponent = (props) => {
   const { setBoxName, refreshGallery } = props;
   const box = props.box || {};
   const { boxName } = box;
   const isBoxFull = box.crayons?.length >= 8;
-  console.log(box);
 
-  const handleSaveBox = () => {
-   
-  };
+  const [editMode, setEditMode] = useState(false);
+  const [editedName, setEditedName] = useState(boxName);
+
+  const handleSaveBox = () => {};
 
   const handleEditBoxName = () => {
-    const updatedName = prompt("Enter the new name for the box:", boxName);
-    if (updatedName !== null) {
-      updateBox(box._id, { boxName: updatedName }).then(() => {
-        refreshGallery();
-      });
-    }
+    setEditMode(true);
   };
- 
+
+  const handleEditNameChange = (e) => {
+    setEditedName(e.target.value);
+  };
+
+  const handleEditNameSubmit = () => {
+    updateBox(box._id, { boxName: editedName }).then(() => {
+      refreshGallery();
+      setEditMode(false);
+    });
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    setEditedName(boxName);
+  };
 
   const handleDeleteBox = () => {
     const isConfirmed = window.confirm(
@@ -36,18 +45,26 @@ const BoxComponent = (props) => {
 
   return (
     <div>
-      <hr/>
-      <h3>Crayon Box</h3>
+      <hr />
 
-      {boxName && <p>Box Name: {boxName}</p>}
-      {isBoxFull ? (
-        <button onClick={handleSaveBox}>Save Box</button>
+      {editMode ? (
+        <div>
+          <input
+            type="text"
+            value={editedName}
+            onChange={handleEditNameChange}
+          />
+          <button onClick={handleEditNameSubmit}>Save</button>
+          <button onClick={handleCancelEdit}>Cancel</button>
+        </div>
       ) : (
-        <p>Box is not full yet.</p>
+        <div>
+          {boxName && <p>Box Name: {boxName}</p>}
+          <button onClick={handleEditBoxName}>Edit Box Name</button>
+          <button onClick={handleDeleteBox}>Delete Box</button>
+        </div>
       )}
-      <button onClick={handleEditBoxName}>Edit Box Name</button>
-      <button onClick={handleDeleteBox}>Delete Box</button>
-      <hr/>
+      <hr />
     </div>
   );
 };
