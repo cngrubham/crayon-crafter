@@ -35,7 +35,7 @@ function HomePage() {
 
   const adjustColor = (color, index) => {
     const rgbColor = hexToRgb(color);
-    const step = 10;
+    const step = 20;
     const adjustedColor = `rgb(
       ${Math.min(rgbColor.r + index * step, 255)},
       ${Math.min(rgbColor.g + index * step, 255)},

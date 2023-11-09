@@ -5,7 +5,7 @@ import CrayonHandle from "../CrayonHandle";
 import "./styles.css";
 
 const BoxComponent = (props) => {
-  const { setBoxName, refreshGallery } = props;
+  const { setBoxName, refreshGallery, isGalleryPage } = props;
   const box = props.box || {};
   const { boxName, crayons } = box;
 
@@ -74,12 +74,15 @@ const BoxComponent = (props) => {
         </div>
       ) : (
         <div>
-          {boxName && <p>Box Name: {boxName}</p>}
-          
-          <button onClick={handleEditBoxName}>Edit</button>
-          <br />
-          <button onClick={handleDeleteBox}>Delete</button>
-        </div>
+        {boxName && <p>Box Name: {boxName}</p>}
+        {isGalleryPage && (
+          <>
+            <button onClick={handleEditBoxName}>Edit</button>
+            <br />
+            <button onClick={handleDeleteBox}>Delete</button>
+          </>
+        )}
+      </div>
       )}
     </div>
   );

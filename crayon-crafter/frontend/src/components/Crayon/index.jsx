@@ -18,7 +18,7 @@ const CrayonComponent = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       <div
         style={{
           backgroundImage: `url('/images/crayon1.png')`,

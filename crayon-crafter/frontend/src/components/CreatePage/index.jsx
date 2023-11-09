@@ -89,8 +89,9 @@ const CreatePage = () => {
         isBoxFull={isBoxFull}
         selectedCrayons={selectedCrayons}
       />
+      <h2 className="text-lg mb-4">Add 8 Crayons to your Box</h2>
       <div className="input-group">
-        <label>Name Box</label>
+        <label></label>
         <input
           type="text"
           placeholder="Enter Box Name"
@@ -102,7 +103,7 @@ const CreatePage = () => {
       {isBoxFull ? (
             <button onClick={handleSaveBox}>Save Box</button>
           ) : (
-            <p>Box is not full yet.</p>
+            <p>Your Box is not full yet.</p>
           )}
       <BoxComponent
         box={{ crayons: selectedCrayons, boxName }}

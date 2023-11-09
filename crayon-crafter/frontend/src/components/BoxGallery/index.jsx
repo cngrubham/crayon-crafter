@@ -31,7 +31,7 @@ console.log(boxes)
     <div>
       <h1>Box Gallery</h1>
       {boxes.map((box) => (
-        <BoxComponent key={box._id} box={box} refreshGallery={refreshGallery} />
+        <BoxComponent key={box._id} box={box} refreshGallery={refreshGallery} isGalleryPage={true}/>
       ))}
     </div>
   );
