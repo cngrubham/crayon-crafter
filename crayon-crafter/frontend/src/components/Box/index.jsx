@@ -1,12 +1,17 @@
 import React from "react";
 
-const BoxComponent = ({  selectedCrayons, onSaveBox, isBoxFull, boxName, setBoxName  }) => {
+const BoxComponent = (props) => {
+  const { onSaveBox, setBoxName } = props;
+  const box = props.box || {};
+  const { boxName } = box;
+  const isBoxFull = box.crayons?.length >= 8;
+  console.log(box);
   const handleSaveBox = () => {
-    onSaveBox(selectedCrayons);
+    // onSaveBox();
   };
 
   const handleEditBoxName = () => {
-    const updatedName = prompt('Enter the new name for the box:', boxName);
+    const updatedName = prompt("Enter the new name for the box:", boxName);
     if (updatedName !== null) {
       setBoxName(updatedName);
     }
@@ -15,29 +20,18 @@ const BoxComponent = ({  selectedCrayons, onSaveBox, isBoxFull, boxName, setBoxN
   const handleEditBoxCrayons = () => {};
 
   const handleDeleteBox = () => {
-    const isConfirmed = window.confirm('Are you sure you want to delete this box?');
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this box?"
+    );
     if (isConfirmed) {
     }
   };
 
   return (
     <div>
+      <hr/>
       <h3>Crayon Box</h3>
-      {/* {selectedCrayons.map((crayon, index) => (
-        <div
-          key={index}
-          style={{
-            backgroundColor: crayon.hexCode,
-            width: "300px",
-            height: "50px",
-          }}
-        >
-          {crayon.crayonName}
-          <button onClick={() => handleEditCrayon(crayon._id)}>Edit</button>
-          <button onClick={() => handleDeleteCrayon(crayon._id)}>Delete</button>
-        </div>
-      ))} */}
-  
+
       {boxName && <p>Box Name: {boxName}</p>}
       {isBoxFull ? (
         <button onClick={handleSaveBox}>Save Box</button>
@@ -46,6 +40,7 @@ const BoxComponent = ({  selectedCrayons, onSaveBox, isBoxFull, boxName, setBoxN
       )}
       <button onClick={handleEditBoxName}>Edit Box Name</button>
       <button onClick={handleDeleteBox}>Delete Box</button>
+      <hr/>
     </div>
   );
 };

@@ -55,7 +55,6 @@ function HomePage() {
   const createHoverAnimation = (elements) => {
     anime({
       targets: elements,
-      scale: 1.1,
       duration: 300,
       easing: "easeOutSine",
     });

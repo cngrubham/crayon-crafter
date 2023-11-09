@@ -1,15 +1,25 @@
+import { useState } from "react";
+
 const CrayonDisplay = ({
   crayon,
-  handleEditCrayon,
-  handleDeleteCrayon,
-  crayonData,
-  setCrayonData,
-  editIndex,
-  index,
+  handleEditCrayonProp,
+  handleDeleteCrayonProp,
 }) => {
-  return (
-    <li>
-      {editIndex === index ? (
+  const [crayonData, setCrayonData] = useState(crayon);
+  const [editMode, setEditMode] = useState(false);
+  const toggleEditMode = () => setEditMode(!editMode);
+
+  const handleDelete = () => {
+    handleDeleteCrayonProp(crayon._id);
+  };
+
+  const handleEdit = () => {
+    handleEditCrayonProp(crayon._id, crayonData);
+    toggleEditMode();
+  };
+  if (editMode) {
+    return (
+      <li>
         <input
           type="text"
           value={crayonData.crayonName}
@@ -17,19 +27,15 @@ const CrayonDisplay = ({
             setCrayonData({ ...crayonData, crayonName: e.target.value })
           }
         />
-      ) : (
-        crayon.crayonName
-      )}
-      {editIndex === index ? (
-        <button onClick={handleCreateCrayon}>Save</button>
-      ) : (
-        <>
-          <button onClick={() => handleDeleteCrayon(crayon.id)}>Delete</button>
-          <button onClick={() => handleEditCrayon(index)}>
-            {editIndex === index ? "Save" : "Edit"}
-          </button>
-        </>
-      )}
+        <button onClick={handleEdit}>Save</button>
+      </li>
+    );
+  }
+  return (
+    <li>
+      <p>{crayon.crayonName}</p>
+      <button onClick={handleDelete}>Delete</button>
+      <button onClick={toggleEditMode}>Edit</button>
     </li>
   );
 };

@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ColorPicker from "../ColorPicker";
 import CrayonComponent from "../Crayon";
 import BoxComponent from "../Box";
-import { createCrayon, createBox, deleteCrayon } from "../../../utils/backend";
+import {
+  createCrayon,
+  createBox,
+  deleteCrayon,
+  updateCrayon,
+} from "../../../utils/backend";
 
 const CreatePage = () => {
   const [selectedColor, setSelectedColor] = useState("#ff0000");
   const [selectedCrayons, setSelectedCrayons] = useState([]);
   const [boxName, setBoxName] = useState("");
-  const [isBoxFull, setIsBoxFull] = useState(false);
-
-  useEffect(() => {
-    setIsBoxFull(selectedCrayons.length >= 8);
-  }, [selectedCrayons]);
+  const navigate = useNavigate();
+  const isBoxFull = selectedCrayons.length >= 8;
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -27,8 +30,9 @@ const CreatePage = () => {
   };
 
   const handleEditCrayon = (id, crayonData) => {
+    updateCrayon(id, crayonData);
     const updatedCrayons = selectedCrayons.map((crayon) => {
-      if (crayon.id === id) {
+      if (crayon._id === id) {
         return {
           ...crayon,
           crayonName: crayonData.crayonName,
@@ -36,17 +40,16 @@ const CreatePage = () => {
       }
       return crayon;
     });
-  
-    setSelectedCrayons(updatedCrayons); 
+
+    setSelectedCrayons(updatedCrayons);
   };
-  
 
   const handleDeleteCrayon = (id) => {
-    console.log("Deleting crayon with id:", id); 
+    console.log("Deleting crayon with id:", id);
     deleteCrayon(id)
       .then(() => {
         const updatedCrayons = selectedCrayons.filter(
-          (crayon) => crayon.id !== id
+          (crayon) => crayon._id !== id
         );
         setSelectedCrayons(updatedCrayons);
       })
@@ -71,7 +74,7 @@ const CreatePage = () => {
   const handleSaveBox = () => {
     handleCreateBox();
     setSelectedCrayons([]);
-    setIsBoxFull(false);
+    navigate("/boxes");
   };
 
   return (
@@ -79,27 +82,25 @@ const CreatePage = () => {
       <h2 className="text-2xl mb-4">Create Your Crayon</h2>
       <ColorPicker onColorSelect={handleColorSelect} />
       <CrayonComponent
-       hexCode={selectedColor}
-       onCreateCrayon={handleCreateCrayon}
-       handleDeleteCrayonProp={handleDeleteCrayon}
-       handleEditCrayonProp={handleEditCrayon}
-       isBoxFull={isBoxFull}
-       selectedCrayons={selectedCrayons}
-      />
-      <input
-        type="text"
-        placeholder="Enter Box Name"
-        value={boxName}
-        onChange={(e) => setBoxName(e.target.value)}
-        className="border p-2 rounded mb-4"
-      />
-      <BoxComponent
-        selectedCrayons={selectedCrayons}
-        onSaveBox={handleSaveBox}
+        hexCode={selectedColor}
+        onCreateCrayon={handleCreateCrayon}
+        handleDeleteCrayonProp={handleDeleteCrayon}
+        handleEditCrayonProp={handleEditCrayon}
         isBoxFull={isBoxFull}
-        boxName={boxName}
-        setBoxName={setBoxName}
+        selectedCrayons={selectedCrayons}
       />
+      <div className="input-group">
+        <label>Name Box</label>
+        <input
+          type="text"
+          placeholder="Enter Box Name"
+          value={boxName}
+          onChange={(e) => setBoxName(e.target.value)}
+          className="border p-2 rounded mb-4"
+        />
+      </div>
+      {isBoxFull && <button onClick={handleSaveBox}>Create Box</button>}
+      <BoxComponent box={{ crayons: selectedCrayons, boxName }} />
     </div>
   );
 };

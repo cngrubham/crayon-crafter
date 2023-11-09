@@ -22,33 +22,13 @@ const BoxGallery = ({  }) => {
     fetchBoxes();
   }, []); 
 
-  const handleEditCrayon = async (boxId, crayonId, updatedCrayonData) => {
-    try {
-      const updatedCrayon = await updateCrayon(crayonId, updatedCrayonData);
-    } catch (error) {
-      console.error("Error updating crayon:", error);
-    }
-  };
-
-  const handleDeleteCrayon = async (boxId, crayonId) => {
-    try {
-      await deleteCrayon(crayonId);
-    } catch (error) {
-      console.error("Error deleting crayon:", error);
-    }
-  };
-
   return (
     <div>
       <h1>Box Gallery</h1>
       {boxes.map((box) => (
         <BoxComponent
-          key={box.id}
+          key={box._id}
           box={box}
-          onEditCrayon={(crayonId, updatedCrayonData) =>
-            handleEditCrayon(box.id, crayonId, updatedCrayonData)
-          }
-          onDeleteCrayon={(crayonId) => handleDeleteCrayon(box.id, crayonId)}
         />
       ))}
     </div>
