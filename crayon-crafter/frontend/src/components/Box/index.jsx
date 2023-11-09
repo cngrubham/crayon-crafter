@@ -49,7 +49,7 @@ const BoxComponent = (props) => {
 
   return (
     <div className="box-style">
-      {crayons && crayons.length > 0 && (
+{crayons && crayons.length > 0 && (
             <div className="crayon-grid">
               {/* <p>Crayons:</p> */}
               {crayons.map((crayon) => (

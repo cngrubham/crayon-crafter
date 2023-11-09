@@ -20,7 +20,14 @@ const CrayonComponent = ({
   return (
     <div>
       <div
-        style={{ backgroundColor: hexCode, width: "50px", height: "50px" }}
+        style={{
+          backgroundImage: `url('/images/crayon1.png')`,
+          backgroundColor: hexCode,
+          backgroundSize: "cover",
+          backgroundRepeat: 'no-repeat',
+          width: "218px",
+          height: "50px",
+        }}
       ></div>
       {isBoxFull ? (
         <p>Box is Full</p>

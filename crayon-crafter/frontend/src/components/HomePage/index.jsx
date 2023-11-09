@@ -5,7 +5,7 @@ import "./styles.css";
 import anime from "animejs";
 
 function HomePage() {
-  const [selectedColor, setSelectedColor] = useState("#ff0000");
+  const [selectedColor, setSelectedColor] = useState("#22d69d");
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);

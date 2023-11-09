@@ -11,7 +11,7 @@ import {
 } from "../../../utils/backend";
 
 const CreatePage = () => {
-  const [selectedColor, setSelectedColor] = useState("#ff0000");
+  const [selectedColor, setSelectedColor] = useState("#fffff");
   const [selectedCrayons, setSelectedCrayons] = useState([]);
   const [boxName, setBoxName] = useState("");
   const navigate = useNavigate();

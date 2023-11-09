@@ -26,7 +26,7 @@ const CrayonDisplay = ({ crayonId, crayonName, hexCode }) => {
       </div>
       <div>
         {/* <p>Crayon ID: {crayonId}</p> */}
-        {/* <p>Crayon Name: {crayonName}</p> */}
+        {/* <p> {crayonName}</p> */}
         {/* <p>Hex Code: {hexCode}</p> */}
       </div>
     </div>
