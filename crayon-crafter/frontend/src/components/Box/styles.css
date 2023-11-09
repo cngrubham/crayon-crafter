@@ -4,6 +4,7 @@
     border: 1px solid #ccc;
     width: 430px;
     display: flex;
+    flex-direction: column;
     }
 .crayon-grid {
     background-color: white;

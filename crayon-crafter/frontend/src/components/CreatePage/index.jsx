@@ -107,6 +107,7 @@ const CreatePage = () => {
       <BoxComponent
         box={{ crayons: selectedCrayons, boxName }}
         setBoxName={setBoxName}
+        isCreatePage={true}
       />
     </div>
   );

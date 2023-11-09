@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { deleteBox, updateBox } from "../../../utils/backend";
 import CrayonDisplay from "../CrayonDisplay";
-import "./styles.css"
+import CrayonHandle from "../CrayonHandle";
+import "./styles.css";
 
 const BoxComponent = (props) => {
   const { setBoxName, refreshGallery } = props;
   const box = props.box || {};
   const { boxName, crayons } = box;
-  console.log("whats in my box", box);
+
   const isBoxFull = box.crayons?.length >= 8;
 
   const [editMode, setEditMode] = useState(false);
@@ -48,8 +49,19 @@ const BoxComponent = (props) => {
 
   return (
     <div className="box-style">
-     
-
+      {crayons && crayons.length > 0 && (
+            <div className="crayon-grid">
+              {/* <p>Crayons:</p> */}
+              {crayons.map((crayon) => (
+                <CrayonDisplay
+                  key={crayon._id}
+                  crayonId={crayon._id}
+                  crayonName={crayon.crayonName}
+                  hexCode={crayon.hexCode}
+                />
+              ))}
+            </div>
+          )}
       {editMode ? (
         <div>
           <input
@@ -63,27 +75,14 @@ const BoxComponent = (props) => {
       ) : (
         <div>
           {boxName && <p>Box Name: {boxName}</p>}
-          {crayons && crayons.length > 0 && (
-            <div className="crayon-grid">
-              {/* <p>Crayons:</p> */}
-              {crayons.map((crayon) => (
-                <CrayonDisplay
-                  key={crayon._id}
-                  crayonId={crayon._id}
-                  crayonName={crayon.crayonName}
-                  hexCode={crayon.hexCode}
-                />
-              ))}
-            </div>
-          )}
+          
           <button onClick={handleEditBoxName}>Edit</button>
+          <br />
           <button onClick={handleDeleteBox}>Delete</button>
         </div>
       )}
-    
     </div>
   );
 };
 
 export default BoxComponent;
- 
