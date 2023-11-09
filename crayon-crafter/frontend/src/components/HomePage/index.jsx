@@ -1,8 +1,9 @@
+import anime from "animejs";
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import ColorPicker from "../ColorPicker";
+import About from "../About";
 import "./styles.css";
-import anime from "animejs";
 
 function HomePage() {
   const [selectedColor, setSelectedColor] = useState("#22d69d");
@@ -89,7 +90,7 @@ function HomePage() {
 
   return (
     <div className="homepage-container">
-      <h1>Welcome to Crayon Crafter</h1>
+      <h1>Crayon Crafter</h1>
 
       <div
         className="crayon-row"
@@ -117,6 +118,7 @@ function HomePage() {
       <div className="color-picker">
         <ColorPicker onColorSelect={handleColorSelect} />
       </div>
+      <About />
     </div>
   );
 }
