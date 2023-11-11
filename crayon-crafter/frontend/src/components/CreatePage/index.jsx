@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ColorPicker from "../ColorPicker";
 import CrayonComponent from "../Crayon";
-import BoxComponent from "../Box";
 import "./styles.css";
 
 import {
@@ -81,41 +80,37 @@ const CreatePage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen create-page">
-      <div></div>
-      <h2 className="text-2xl mb-4">Create Your Crayon</h2>
-      <ColorPicker onColorSelect={handleColorSelect} />
-      
-      <CrayonComponent
-        hexCode={selectedColor}
-        onCreateCrayon={handleCreateCrayon}
-        handleDeleteCrayonProp={handleDeleteCrayon}
-        handleEditCrayonProp={handleEditCrayon}
-        isBoxFull={isBoxFull}
-        selectedCrayons={selectedCrayons}
-      />
-    
-      <h2 className="text-lg mb-4">Add 8 Crayons to your Box</h2>
-      <div className="input-group">
-        <label></label>
-        <input
-          type="text"
-          maxLength={20} 
-          placeholder="Enter Box Name"
-          value={boxName}
-          onChange={(e) => setBoxName(e.target.value)}
-          className="border p-2 rounded mb-4"
+      <div className="flex flex-col items-center justify-center create-container">
+        <h2 className="text-2xl mb-4">Create Your Crayon</h2>
+        <ColorPicker onColorSelect={handleColorSelect} />
+
+        <CrayonComponent
+          hexCode={selectedColor}
+          onCreateCrayon={handleCreateCrayon}
+          handleDeleteCrayonProp={handleDeleteCrayon}
+          handleEditCrayonProp={handleEditCrayon}
+          isBoxFull={isBoxFull}
+          selectedCrayons={selectedCrayons}
         />
+
+        <h2 className="text-lg mb-4">Add 8 Crayons to your Box</h2>
+        <div className="input-group">
+          <label></label>
+          <input
+            type="text"
+            maxLength={20}
+            placeholder="Enter Box Name"
+            value={boxName}
+            onChange={(e) => setBoxName(e.target.value)}
+            className="border p-2 rounded mb-4"
+          />
+        </div>
+        {isBoxFull ? (
+          <button onClick={handleSaveBox}>Save Box</button>
+        ) : (
+          <p>Your Box is not full yet.</p>
+        )}
       </div>
-      {isBoxFull ? (
-            <button onClick={handleSaveBox}>Save Box</button>
-          ) : (
-            <p>Your Box is not full yet.</p>
-          )}
-      {/* <BoxComponent
-        box={{ crayons: selectedCrayons, boxName }}
-        setBoxName={setBoxName}
-        isCreatePage={true}
-      /> */}
     </div>
   );
 };

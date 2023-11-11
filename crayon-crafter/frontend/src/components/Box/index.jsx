@@ -49,19 +49,23 @@ const BoxComponent = (props) => {
 
   return (
     <div className="box-style">
-{crayons && crayons.length > 0 && (
-            <div className="crayon-grid">
-              {/* <p>Crayons:</p> */}
-              {crayons.map((crayon) => (
-                <CrayonDisplay
-                  key={crayon._id}
-                  crayonId={crayon._id}
-                  crayonName={crayon.crayonName}
-                  hexCode={crayon.hexCode}
-                />
-              ))}
+      {crayons && crayons.length > 0 && (
+        <div className="crayon-grid">
+          {crayons.map((crayon) => (
+            <div key={crayon._id} className="crayon-container">
+              <CrayonDisplay
+                key={crayon._id}
+                crayonId={crayon._id}
+                crayonName={crayon.crayonName}
+                hexCode={crayon.hexCode}
+              />
+              <div>
+                <p>{crayon.crayonName}</p>
+              </div>
             </div>
-          )}
+          ))}
+        </div>
+      )}
       {editMode ? (
         <div>
           <input
@@ -74,15 +78,15 @@ const BoxComponent = (props) => {
         </div>
       ) : (
         <div>
-        {boxName && <p>Box Name: {boxName}</p>}
-        {isGalleryPage && (
-          <>
-            <button onClick={handleEditBoxName}>Edit</button>
-            <br />
-            <button onClick={handleDeleteBox}>Delete</button>
-          </>
-        )}
-      </div>
+          {boxName && <p>Box Name: {boxName}</p>}
+          {isGalleryPage && (
+            <>
+              <button onClick={handleEditBoxName}>Edit</button>
+              <br />
+              <button onClick={handleDeleteBox}>Delete</button>
+            </>
+          )}
+        </div>
       )}
     </div>
   );

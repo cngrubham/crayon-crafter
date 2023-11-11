@@ -11,11 +11,11 @@ const CrayonHandle = ({
   const toggleEditMode = () => setEditMode(!editMode);
 
   const handleDelete = () => {
-    handleDeleteCrayonProp(crayon._id);
+    handleDeleteCrayonProp(crayonData._id);
   };
   console.log(crayon)
   const handleEdit = () => {
-    handleEditCrayonProp(crayon._id, crayonData);
+    handleEditCrayonProp(crayonData._id, crayonData);
     toggleEditMode();
   };
 
@@ -74,7 +74,7 @@ const CrayonHandle = ({
             <button onClick={handleEdit}>Save</button>
           </div>
         ) : (
-          <div>
+          <div className="crayon-actions">
             <button onClick={handleDelete}>Delete</button>
             <button onClick={toggleEditMode}>Edit</button>
           </div>

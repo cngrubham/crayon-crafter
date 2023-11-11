@@ -1,3 +1,10 @@
 .create-page {
     background-color: #0c2122;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-container {
+    background-color: white;
+    margin-top: 60px;
 }
