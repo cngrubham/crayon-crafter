@@ -84,6 +84,7 @@ const CreatePage = () => {
       <div></div>
       <h2 className="text-2xl mb-4">Create Your Crayon</h2>
       <ColorPicker onColorSelect={handleColorSelect} />
+      
       <CrayonComponent
         hexCode={selectedColor}
         onCreateCrayon={handleCreateCrayon}
@@ -92,11 +93,13 @@ const CreatePage = () => {
         isBoxFull={isBoxFull}
         selectedCrayons={selectedCrayons}
       />
+    
       <h2 className="text-lg mb-4">Add 8 Crayons to your Box</h2>
       <div className="input-group">
         <label></label>
         <input
           type="text"
+          maxLength={20} 
           placeholder="Enter Box Name"
           value={boxName}
           onChange={(e) => setBoxName(e.target.value)}

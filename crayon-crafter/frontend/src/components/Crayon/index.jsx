@@ -35,6 +35,7 @@ const CrayonComponent = ({
         <div>
           <input
             type="text"
+            maxLength={10} 
             placeholder="Enter Crayon Name"
             value={crayonName}
             onChange={(e) => setCrayonName(e.target.value)}
@@ -42,7 +43,7 @@ const CrayonComponent = ({
           <button onClick={handleCreateCrayon}>Create Crayon</button>
         </div>
       )}
-      <ul>
+      <ul className="crayon-grid">
         {selectedCrayons &&
           selectedCrayons.map((crayon, index) => (
             

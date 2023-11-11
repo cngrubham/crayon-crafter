@@ -31,6 +31,7 @@ const CrayonHandle = ({
       <li>
         <input
           type="text"
+          maxLength={10}
           value={crayonData.crayonName}
           onChange={(e) =>
             setCrayonData({ ...crayonData, crayonName: e.target.value })
@@ -41,11 +42,8 @@ const CrayonHandle = ({
     );
   }
   return (
-    <div>
-        <div className="crayon-info">
-        <p>ID: {crayon._id}</p>
-        <p>Name: {crayonData.crayonName}</p>
-        <p>Hex Code: {crayonData.hexCode || crayon.hexCode}</p>
+    <div className="crayon-container">
+       <div className="">
         <div
         style={{
           backgroundImage: `url('/images/crayon.png')`,
@@ -55,7 +53,12 @@ const CrayonHandle = ({
           width: "50px",
           height: "218px",
         }}
-      ></div>
+      >
+        <div className="crayon-info">
+        {/* <p>ID: {crayon._id}</p> */}
+        <p> {crayonData.crayonName}</p>
+        {/* <p>Hex Code: {crayonData.hexCode || crayon.hexCode}</p> */}
+
       </div>
       <div>
         {editMode ? (
@@ -63,10 +66,11 @@ const CrayonHandle = ({
             <input
               type="text"
               value={crayonData.crayonName}
+              maxLength={10} 
               onChange={(e) =>
                 setCrayonData({ ...crayonData, crayonName: e.target.value })
               }
-            />
+              />
             <button onClick={handleEdit}>Save</button>
           </div>
         ) : (
@@ -75,7 +79,9 @@ const CrayonHandle = ({
             <button onClick={toggleEditMode}>Edit</button>
           </div>
         )}
+        </div>
       </div>
+    </div>
     </div>
   );
 };

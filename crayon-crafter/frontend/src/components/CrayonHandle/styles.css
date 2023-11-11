@@ -1,10 +1,4 @@
-.crayon-grid {
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    display: flex;
-    width: 70px;
-}
+
 .crayon-container {
     position: relative;
     width: 50px;
@@ -32,3 +26,22 @@
     font-size: 12px;
     color: white; 
   }
+.crayon-info {
+  height: 80%;
+}
+  .crayon-info p {
+    position: absolute;
+    top: 36%;
+    left: 20%;
+    padding: 2px;
+    height: 50%;
+    border-radius: 20px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    text-align: center;
+    color: white;
+    background-color: black;
+    font-weight: 800;
+  }
+  
