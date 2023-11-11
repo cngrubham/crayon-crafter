@@ -45,6 +45,7 @@ const CrayonComponent = ({
       <ul>
         {selectedCrayons &&
           selectedCrayons.map((crayon, index) => (
+            
             <CrayonHandle
               key={index}
               crayon={crayon}

@@ -108,11 +108,11 @@ const CreatePage = () => {
           ) : (
             <p>Your Box is not full yet.</p>
           )}
-      <BoxComponent
+      {/* <BoxComponent
         box={{ crayons: selectedCrayons, boxName }}
         setBoxName={setBoxName}
         isCreatePage={true}
-      />
+      /> */}
     </div>
   );
 };

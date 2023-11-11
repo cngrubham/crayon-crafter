@@ -46,6 +46,16 @@ const CrayonHandle = ({
         <p>ID: {crayon._id}</p>
         <p>Name: {crayonData.crayonName}</p>
         <p>Hex Code: {crayonData.hexCode || crayon.hexCode}</p>
+        <div
+        style={{
+          backgroundImage: `url('/images/crayon.png')`,
+          backgroundColor: crayonData.hexCode,
+          backgroundSize: "cover",
+          backgroundRepeat: 'no-repeat',
+          width: "50px",
+          height: "218px",
+        }}
+      ></div>
       </div>
       <div>
         {editMode ? (
