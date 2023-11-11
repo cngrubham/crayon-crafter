@@ -7,9 +7,12 @@ import "./styles.css";
 
 function HomePage() {
   const [selectedColor, setSelectedColor] = useState("#22d69d");
+  const [showAbout, setShowAbout] = useState(false);
+  const [borderColor, setBorderColor] = useState("#000"); 
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
+    setBorderColor(color); 
     animateCrayons();
   };
 
@@ -88,37 +91,48 @@ function HomePage() {
     anime.remove(element);
   };
 
-  return (
-    <div className="homepage-container">
-      <h1>Crayon Crafter</h1>
+  const toggleAbout = () => {
+    setShowAbout(!showAbout);
+  };
 
-      <div
-        className="crayon-row"
-        onMouseEnter={() => hoverAnimation(".crayon")}
-        onMouseLeave={() => createContinuousAnimation()}
-      >
-        {Array.from({ length: 10 }).map((_, index) => (
+  return (
+    <div className="homepage">
+      <div className="homepage-container" style={{ boxShadow: `inset 0 0 10px ${borderColor}`, border: `10px solid ${borderColor}`  }}>
+      {showAbout ? (
+        <About />
+      ) : (
+        <>
           <div
-            key={index}
-            className="crayon"
-            style={{ backgroundColor: adjustColor(selectedColor, index) }}
-            onMouseEnter={() =>
-              createHoverAnimation(`.crayon:nth-child(${index + 1})`)
-            }
-            onMouseLeave={() =>
-              createResetAnimation(`.crayon:nth-child(${index + 1})`)
-            }
+            className="crayon-row"
+            onMouseEnter={() => hoverAnimation(".crayon")}
+            onMouseLeave={() => createContinuousAnimation()}
           >
-            <Link to="/create">          
-              <img src="/images/crayon.png" alt="Crayon" />
-            </Link>
+            <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-amber-300 font-custom font-black with-outline">Crayon Crafter</h1>
+            {Array.from({ length: 10 }).map((_, index) => (
+              <div
+                key={index}
+                className="crayon"
+                style={{ backgroundColor: adjustColor(selectedColor, index) }}
+                onMouseEnter={() =>
+                  createHoverAnimation(`.crayon:nth-child(${index + 1})`)
+                }
+                onMouseLeave={() =>
+                  createResetAnimation(`.crayon:nth-child(${index + 1})`)
+                }
+              >
+                <Link to="/create">          
+                  <img src="/images/crayon.png" alt="Crayon" />
+                </Link>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="color-picker">
-        <ColorPicker onColorSelect={handleColorSelect} />
-      </div>
-      <About />
+          <div className="color-picker">
+            <ColorPicker onColorSelect={handleColorSelect} />
+          </div>
+        </>
+      )}
+      <button className="bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded" style={{ boxShadow: `0 0 12px ${borderColor}` }} onClick={toggleAbout}>{showAbout ? "Close" : "About"}</button>
+    </div>
     </div>
   );
 }

@@ -42,6 +42,11 @@ const CrayonHandle = ({
   }
   return (
     <div>
+        <div className="crayon-info">
+        <p>ID: {crayon._id}</p>
+        <p>Name: {crayonData.crayonName}</p>
+        <p>Hex Code: {crayonData.hexCode || crayon.hexCode}</p>
+      </div>
       <div>
         {editMode ? (
           <div>

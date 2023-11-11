@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import ColorPicker from "../ColorPicker";
 import CrayonComponent from "../Crayon";
 import BoxComponent from "../Box";
+import "./styles.css";
+
 import {
   createCrayon,
   createBox,
@@ -78,7 +80,8 @@ const CreatePage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen create-page">
+      <div></div>
       <h2 className="text-2xl mb-4">Create Your Crayon</h2>
       <ColorPicker onColorSelect={handleColorSelect} />
       <CrayonComponent
