@@ -38,7 +38,7 @@ return (
         box={box}
         refreshGallery={refreshGallery}
         isGalleryPage={true}
-        className="box-component" // Apply the BoxComponent styles
+        className="box-component" 
       />
     ))}
     </div>

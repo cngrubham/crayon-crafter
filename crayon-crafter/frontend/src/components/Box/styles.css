@@ -6,6 +6,7 @@
     height: 280px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .crayon-grid {
@@ -15,6 +16,17 @@
     width: 420px;
     height: 300px;
     display: flex;
+}
+
+@media screen and (max-width: 700px) {
+    .crayon-grid {
+        padding-left: 8px;
+        border-right: none;
+        border-left: none;
+        width: 400px;
+        height: 300px;
+        display: flex;
+    }
 }
 
 .overlay-name {
@@ -39,40 +51,37 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
-  }
+    font-weight: 600;
+    gap: 200px;
+}
 
 .box-info input {
     background-color: rgb(255, 254, 166);
     text-align: center;
-  }
-  
-  .box-actions {
+}
+
+.box-actions {
     display: flex;
-  }
-  
-  .box-actions button {
+}
+
+.box-actions button {
     background-color: #055F46;
-    color: yellow;
-    padding: 1px 10px; 
-    border: none; 
-  }
-  .box-actions button:hover {
+    color: white;
+    padding: 1px 10px;
+    border: none;
+}
+
+.box-actions button:hover {
     background-color: #033a2b;
-  }
-  
-  .box-actions button:first-child {
+}
+
+.box-actions button:first-child {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-  }
-  
-  .box-actions button:last-child {
+}
+
+.box-actions button:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    color: #FF5901;
-  }
-  
-  
-  
-  
-  
-  
+    color: #f5ae88;
+}

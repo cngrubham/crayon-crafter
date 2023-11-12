@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    padding: 20px;
+    margin: auto;
   }
   
   .gallery-page {
@@ -10,10 +12,27 @@
     justify-content: center;
     align-items: center;
     margin-top: 100px;
+    
   }
 
   .gallery-page h1 {
     font-size: 60px;
     font-family: 'Titillium Web', 'sans-serif';
     color: #055f46;
+    
+  }
+.box-component {
+    display: flex;
+    align-items: center;
+}
+
+  @media screen and (max-width: 1500px) {
+    .box-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+  }
+  @media screen and (max-width: 1000px) {
+    .box-gallery {
+        grid-template-columns: repeat(1, 1fr);
+      }
   }

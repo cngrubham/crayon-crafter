@@ -51,7 +51,7 @@ const CrayonHandle = ({
             <input className="input-field"
               type="text"
               value={crayonData.crayonName}
-              maxLength={12} 
+              maxLength={11} 
               onChange={(e) =>
                 setCrayonData({ ...crayonData, crayonName: e.target.value })
               }

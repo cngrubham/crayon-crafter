@@ -81,7 +81,7 @@ const CreatePage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen create-page">
       <div className="flex flex-col items-center justify-center create-container">
-        <h2 className="text-2xl mb-4">Create Your Crayon</h2>
+        <h2 className="text-2xl mb-4">Create Your Crayons</h2>
         <ColorPicker onColorSelect={handleColorSelect} />
 
         <CrayonComponent
@@ -102,11 +102,11 @@ const CreatePage = () => {
             placeholder="Enter Box Name"
             value={boxName}
             onChange={(e) => setBoxName(e.target.value)}
-            className="border p-2 rounded mb-4"
+            className="border p-2 rounded mb-4 box-input"
           />
         </div>
         {isBoxFull ? (
-          <button onClick={handleSaveBox}>Save Box</button>
+          <button className="create-box-btn" onClick={handleSaveBox}>Save Box</button>
         ) : (
           <p>Your Box is not full yet.</p>
         )}

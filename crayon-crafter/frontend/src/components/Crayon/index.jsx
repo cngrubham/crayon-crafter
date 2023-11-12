@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CrayonHandle from "../CrayonHandle";
+import "./styles.css"
 
 const CrayonComponent = ({
   hexCode,
@@ -32,15 +33,15 @@ const CrayonComponent = ({
       {isBoxFull ? (
         <p>Box is Full</p>
       ) : (
-        <div>
+        <div className="create-crayon-form">
           <input
             type="text"
-            maxLength={12} 
+            maxLength={11} 
             placeholder="Enter Crayon Name"
             value={crayonName}
             onChange={(e) => setCrayonName(e.target.value)}
           />
-          <button onClick={handleCreateCrayon}>Create Crayon</button>
+          <button className="create-button" onClick={handleCreateCrayon}>Create Crayon</button>
         </div>
       )}
       <ul className="crayon-grid">
