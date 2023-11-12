@@ -10,9 +10,9 @@ const CrayonDisplay = ({ crayonId, crayonName, hexCode }) => {
 
   const crayonStyle = {
     backgroundColor: hexCode,
-    width: "50px",
+    width: "45px",
     height: "200px",
-    borderRadius: "5px",
+  
   };
 
   return (
@@ -21,7 +21,7 @@ const CrayonDisplay = ({ crayonId, crayonName, hexCode }) => {
         <img
           src="/images/crayon.png"
           alt="Crayon"
-          style={{ ...crayonStyle, width: "50px", height: "200px" }}
+          style={{ ...crayonStyle, width: "45px", height: "200px" }}
         />
       </div>
       <div>

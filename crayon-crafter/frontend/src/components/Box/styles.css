@@ -2,7 +2,7 @@
     background-color: #ffe940;
     padding: 10px;
     border: 2px solid #c7b532;
-    width: 450px;
+    width: 420px;
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -13,9 +13,12 @@
     align-items: center;
     background-color: white;
     border: 10px solid #d3ad06;
-    width: 420px;
+    width: 400px;
     height: 300px;
     display: flex;
+}
+.crayon-container {
+    align-items: center;
 }
 
 @media screen and (max-width: 700px) {
@@ -52,7 +55,7 @@
     align-items: center;
     text-align: center;
     font-weight: 600;
-    gap: 200px;
+    gap: 50px;
 }
 
 .box-info input {
