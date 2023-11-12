@@ -35,7 +35,7 @@ const CrayonComponent = ({
         <div>
           <input
             type="text"
-            maxLength={10} 
+            maxLength={12} 
             placeholder="Enter Crayon Name"
             value={crayonName}
             onChange={(e) => setCrayonName(e.target.value)}

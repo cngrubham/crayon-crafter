@@ -59,7 +59,7 @@ const BoxComponent = (props) => {
                 crayonName={crayon.crayonName}
                 hexCode={crayon.hexCode}
               />
-              <div>
+              <div className="overlay-name">
                 <p>{crayon.crayonName}</p>
               </div>
             </div>
@@ -67,24 +67,25 @@ const BoxComponent = (props) => {
         </div>
       )}
       {editMode ? (
-        <div>
+        <div className="box-info">
           <input
             type="text"
             value={editedName}
             onChange={handleEditNameChange}
           />
-          <button onClick={handleEditNameSubmit}>Save</button>
-          <button onClick={handleCancelEdit}>Cancel</button>
+          <div className="box-actions">
+            <button onClick={handleEditNameSubmit}>Save</button>
+            <button onClick={handleCancelEdit}>Cancel</button>
+          </div>
         </div>
       ) : (
-        <div>
-          {boxName && <p>Box Name: {boxName}</p>}
+        <div className="box-info">
+          {boxName && <p>{boxName}</p>}
           {isGalleryPage && (
-            <>
+            <div className="box-actions">
               <button onClick={handleEditBoxName}>Edit</button>
-              <br />
               <button onClick={handleDeleteBox}>Delete</button>
-            </>
+            </div>
           )}
         </div>
       )}

@@ -55,9 +55,32 @@
   text-align: center;
   justify-content: center;
   border-radius: 5px;
-  /* height: 35px; */
   color: white;
   font-size: small;
   background-color: rgba(0, 0, 0, 0.498);
   
+}
+
+.edit-form {
+position: absolute;
+bottom: -28px;
+display: flex;
+
+}
+
+.edit-form button {
+  background-color: #055F46;
+  padding: 2px;
+  border-radius: 4px;
+  color: white;
+}
+
+.input-field {
+  background-color: #FCD34D;
+}
+.bottom-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }

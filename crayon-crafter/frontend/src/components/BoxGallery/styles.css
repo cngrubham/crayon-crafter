@@ -1,0 +1,19 @@
+.box-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .gallery-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+  }
+
+  .gallery-page h1 {
+    font-size: 60px;
+    font-family: 'Titillium Web', 'sans-serif';
+    color: #055f46;
+  }

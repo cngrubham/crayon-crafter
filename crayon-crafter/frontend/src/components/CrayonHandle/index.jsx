@@ -26,24 +26,9 @@ const CrayonHandle = ({
     backgroundColor: crayonData.hexCode || crayon.hexCode,
   };
 
-  if (editMode) {
-    return (
-      <li>
-        <input
-          type="text"
-          maxLength={10}
-          value={crayonData.crayonName}
-          onChange={(e) =>
-            setCrayonData({ ...crayonData, crayonName: e.target.value })
-          }
-        />
-        <button onClick={handleEdit}>Save</button>
-      </li>
-    );
-  }
   return (
     <div className="crayon-container">
-       <div className="">
+      
         <div
         style={{
           backgroundImage: `url('/images/crayon.png')`,
@@ -60,19 +45,19 @@ const CrayonHandle = ({
         {/* <p>Hex Code: {crayonData.hexCode || crayon.hexCode}</p> */}
 
       </div>
-      <div>
+      <div className="bottom-form-container">
         {editMode ? (
-          <div>
-            <input
+          <div className="edit-form">
+            <input className="input-field"
               type="text"
               value={crayonData.crayonName}
-              maxLength={10} 
+              maxLength={12} 
               onChange={(e) =>
                 setCrayonData({ ...crayonData, crayonName: e.target.value })
               }
               />
             <button onClick={handleEdit}>Save</button>
-          </div>
+        </div>
         ) : (
           <div className="crayon-actions">
             <button onClick={handleDelete}>Delete</button>
@@ -81,7 +66,6 @@ const CrayonHandle = ({
         )}
         </div>
       </div>
-    </div>
     </div>
   );
 };

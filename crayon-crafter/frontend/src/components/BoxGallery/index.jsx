@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BoxComponent from "../Box";
 import { getBoxes } from "../../../utils/backend";
+import "./styles.css"
 
 const BoxGallery = ({}) => {
   const [boxes, setBoxes] = useState([]);
@@ -26,15 +27,24 @@ const BoxGallery = ({}) => {
       console.error("Error refreshing boxes:", error);
     }
   };
-console.log(boxes)
-  return (
-    <div>
-      <h1>Box Gallery</h1>
-      {boxes.map((box) => (
-        <BoxComponent key={box._id} box={box} refreshGallery={refreshGallery} isGalleryPage={true}/>
-      ))}
+
+return (
+  <div className="gallery-page">
+  <h1>All Boxes</h1>
+  <div className="box-gallery">
+    {boxes.map((box) => (
+      <BoxComponent
+        key={box._id}
+        box={box}
+        refreshGallery={refreshGallery}
+        isGalleryPage={true}
+        className="box-component" // Apply the BoxComponent styles
+      />
+    ))}
     </div>
-  );
+  </div>
+);
 };
+
 
 export default BoxGallery;
