@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import BoxComponent from "../Box";
-import {
-  getBoxes, 
-  updateCrayon, 
-  deleteCrayon, 
-} from "../../../utils/backend";
+import { getBoxes } from "../../../utils/backend";
+import "./styles.css"
 
-const BoxGallery = ({  }) => {
+const BoxGallery = ({}) => {
   const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
@@ -20,39 +17,34 @@ const BoxGallery = ({  }) => {
     }
 
     fetchBoxes();
-  }, []); 
+  }, []);
 
-  const handleEditCrayon = async (boxId, crayonId, updatedCrayonData) => {
+  const refreshGallery = async () => {
     try {
-      const updatedCrayon = await updateCrayon(crayonId, updatedCrayonData);
+      const boxesData = await getBoxes();
+      setBoxes(boxesData);
     } catch (error) {
-      console.error("Error updating crayon:", error);
+      console.error("Error refreshing boxes:", error);
     }
   };
 
-  const handleDeleteCrayon = async (boxId, crayonId) => {
-    try {
-      await deleteCrayon(crayonId);
-    } catch (error) {
-      console.error("Error deleting crayon:", error);
-    }
-  };
-
-  return (
-    <div>
-      <h1>Box Gallery</h1>
-      {boxes.map((box) => (
-        <BoxComponent
-          key={box.id}
-          box={box}
-          onEditCrayon={(crayonId, updatedCrayonData) =>
-            handleEditCrayon(box.id, crayonId, updatedCrayonData)
-          }
-          onDeleteCrayon={(crayonId) => handleDeleteCrayon(box.id, crayonId)}
-        />
-      ))}
+return (
+  <div className="gallery-page">
+  <h1>All Boxes</h1>
+  <div className="box-gallery">
+    {boxes.map((box) => (
+      <BoxComponent
+        key={box._id}
+        box={box}
+        refreshGallery={refreshGallery}
+        isGalleryPage={true}
+        className="box-component" 
+      />
+    ))}
     </div>
-  );
+  </div>
+);
 };
+
 
 export default BoxGallery;

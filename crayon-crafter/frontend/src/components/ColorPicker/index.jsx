@@ -3,7 +3,7 @@ import iro from '@jaames/iro';
 import anime from 'animejs';
 
 function ColorPicker({ onColorSelect, animationTarget }) {
-  const [color, setColor] = useState('#ff0000');
+  const [color, setColor] = useState('#ffffff');
   const colorPickerRef = useRef(null);
   const animationRef = useRef(null);
 

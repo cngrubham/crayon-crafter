@@ -1,0 +1,90 @@
+.box-style {
+    background-color: #ffe940;
+    padding: 10px;
+    border: 2px solid #c7b532;
+    width: 420px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.crayon-grid {
+    align-items: center;
+    background-color: white;
+    border: 10px solid #d3ad06;
+    width: 400px;
+    height: 300px;
+    display: flex;
+}
+.crayon-container {
+    align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+    .crayon-grid {
+        padding-left: 8px;
+        border-right: none;
+        border-left: none;
+        width: 400px;
+        height: 300px;
+        display: flex;
+    }
+}
+
+.overlay-name {
+    position: absolute;
+    top: 30%;
+    left: 22%;
+    padding: 2px;
+    height: 42%;
+    border-radius: 20px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    text-align: center;
+    color: white;
+    background-color: black;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.box-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    font-weight: 600;
+    gap: 50px;
+}
+
+.box-info input {
+    background-color: rgb(255, 254, 166);
+    text-align: center;
+}
+
+.box-actions {
+    display: flex;
+}
+
+.box-actions button {
+    background-color: #055F46;
+    color: white;
+    padding: 1px 10px;
+    border: none;
+}
+
+.box-actions button:hover {
+    background-color: #033a2b;
+}
+
+.box-actions button:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.box-actions button:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #f5ae88;
+}

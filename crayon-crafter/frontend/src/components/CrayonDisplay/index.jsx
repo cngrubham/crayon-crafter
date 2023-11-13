@@ -1,36 +1,35 @@
-const CrayonDisplay = ({
-  crayon,
-  handleEditCrayon,
-  handleDeleteCrayon,
-  crayonData,
-  setCrayonData,
-  editIndex,
-  index,
-}) => {
+import React from "react";
+
+const CrayonDisplay = ({ crayonId, crayonName, hexCode }) => {
+  const crayonContainerStyle = {
+    // display: "flex",
+    // flexDirection: "column",
+    // alignItems: "center",
+    // gap: "10px",
+  };
+
+  const crayonStyle = {
+    backgroundColor: hexCode,
+    width: "45px",
+    height: "200px",
+  
+  };
+
   return (
-    <li>
-      {editIndex === index ? (
-        <input
-          type="text"
-          value={crayonData.crayonName}
-          onChange={(e) =>
-            setCrayonData({ ...crayonData, crayonName: e.target.value })
-          }
+          <div style={crayonContainerStyle}>
+      <div>
+        <img
+          src="/images/crayon.png"
+          alt="Crayon"
+          style={{ ...crayonStyle, width: "45px", height: "200px" }}
         />
-      ) : (
-        crayon.crayonName
-      )}
-      {editIndex === index ? (
-        <button onClick={handleCreateCrayon}>Save</button>
-      ) : (
-        <>
-          <button onClick={() => handleDeleteCrayon(crayon.id)}>Delete</button>
-          <button onClick={() => handleEditCrayon(index)}>
-            {editIndex === index ? "Save" : "Edit"}
-          </button>
-        </>
-      )}
-    </li>
+      </div>
+      <div>
+        {/* <p>Crayon ID: {crayonId}</p> */}
+        {/* <p> {crayonName}</p> */}
+        {/* <p>Hex Code: {hexCode}</p> */}
+      </div>
+    </div>
   );
 };
 

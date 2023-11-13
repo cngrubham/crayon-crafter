@@ -4,7 +4,7 @@ const db = require("../models");
 
 // Index Route (GET/Read): Retrieve all boxes
 router.get("/", (req, res) => {
-  db.Box.find().then((boxes) => res.json(boxes));
+  db.Box.find().populate('crayons').then((boxes) => res.json(boxes));
 });
 
 // Show Route (GET/Read): Retrieve a specific box by ID
@@ -27,15 +27,7 @@ router.put("/:id", (req, res) => {
 });
 
 // Destroy Route (DELETE/Delete): Delete a specific box by ID
-router.delete("/:id", (req, res) => {
-  db.Box.findByIdAndDelete(req.params.id, (err) => {
-    if (err) {
-      res.status(500).send("Error deleting the box.");
-    } else {
-      res.json({ deletedBoxId: req.params.id });
-    }
-  });
-});
+
 router.delete("/:id", (req, res) => {
     db.Box.findByIdAndDelete(req.params.id).then(() =>
       res.json({ deletedBoxId: req.params.id })

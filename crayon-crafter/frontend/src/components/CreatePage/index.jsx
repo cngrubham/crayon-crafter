@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ColorPicker from "../ColorPicker";
 import CrayonComponent from "../Crayon";
-import BoxComponent from "../Box";
-import { createCrayon, createBox, deleteCrayon } from "../../../utils/backend";
+import "./styles.css";
+
+import {
+  createCrayon,
+  createBox,
+  deleteCrayon,
+  updateCrayon,
+} from "../../../utils/backend";
 
 const CreatePage = () => {
-  const [selectedColor, setSelectedColor] = useState("#ff0000");
+  const [selectedColor, setSelectedColor] = useState("#fffff");
   const [selectedCrayons, setSelectedCrayons] = useState([]);
   const [boxName, setBoxName] = useState("");
-  const [isBoxFull, setIsBoxFull] = useState(false);
-
-  useEffect(() => {
-    setIsBoxFull(selectedCrayons.length >= 8);
-  }, [selectedCrayons]);
+  const navigate = useNavigate();
+  const isBoxFull = selectedCrayons.length >= 8;
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -27,8 +31,9 @@ const CreatePage = () => {
   };
 
   const handleEditCrayon = (id, crayonData) => {
+    updateCrayon(id, crayonData);
     const updatedCrayons = selectedCrayons.map((crayon) => {
-      if (crayon.id === id) {
+      if (crayon._id === id) {
         return {
           ...crayon,
           crayonName: crayonData.crayonName,
@@ -36,17 +41,16 @@ const CreatePage = () => {
       }
       return crayon;
     });
-  
-    setSelectedCrayons(updatedCrayons); 
+
+    setSelectedCrayons(updatedCrayons);
   };
-  
 
   const handleDeleteCrayon = (id) => {
-    console.log("Deleting crayon with id:", id); 
+    console.log("Deleting crayon with id:", id);
     deleteCrayon(id)
       .then(() => {
         const updatedCrayons = selectedCrayons.filter(
-          (crayon) => crayon.id !== id
+          (crayon) => crayon._id !== id
         );
         setSelectedCrayons(updatedCrayons);
       })
@@ -71,35 +75,42 @@ const CreatePage = () => {
   const handleSaveBox = () => {
     handleCreateBox();
     setSelectedCrayons([]);
-    setIsBoxFull(false);
+    navigate("/boxes");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h2 className="text-2xl mb-4">Create Your Crayon</h2>
-      <ColorPicker onColorSelect={handleColorSelect} />
-      <CrayonComponent
-       hexCode={selectedColor}
-       onCreateCrayon={handleCreateCrayon}
-       handleDeleteCrayonProp={handleDeleteCrayon}
-       handleEditCrayonProp={handleEditCrayon}
-       isBoxFull={isBoxFull}
-       selectedCrayons={selectedCrayons}
-      />
-      <input
-        type="text"
-        placeholder="Enter Box Name"
-        value={boxName}
-        onChange={(e) => setBoxName(e.target.value)}
-        className="border p-2 rounded mb-4"
-      />
-      <BoxComponent
-        selectedCrayons={selectedCrayons}
-        onSaveBox={handleSaveBox}
-        isBoxFull={isBoxFull}
-        boxName={boxName}
-        setBoxName={setBoxName}
-      />
+    <div className="flex flex-col items-center justify-center min-h-screen create-page">
+      <div className="flex flex-col items-center justify-center create-container">
+        <h2 className="text-2xl mb-4">Create Your Crayons</h2>
+        <ColorPicker onColorSelect={handleColorSelect} />
+
+        <CrayonComponent
+          hexCode={selectedColor}
+          onCreateCrayon={handleCreateCrayon}
+          handleDeleteCrayonProp={handleDeleteCrayon}
+          handleEditCrayonProp={handleEditCrayon}
+          isBoxFull={isBoxFull}
+          selectedCrayons={selectedCrayons}
+        />
+
+        <h2 className="text-lg mb-4">Add 8 Crayons to your Box</h2>
+        <div className="input-group">
+          <label></label>
+          <input
+            type="text"
+            maxLength={20}
+            placeholder="Enter Box Name"
+            value={boxName}
+            onChange={(e) => setBoxName(e.target.value)}
+            className="border p-2 rounded mb-4 box-input"
+          />
+        </div>
+        {isBoxFull ? (
+          <button className="create-box-btn" onClick={handleSaveBox}>Save Box</button>
+        ) : (
+          <p>Your Box is not full yet.</p>
+        )}
+      </div>
     </div>
   );
 };
