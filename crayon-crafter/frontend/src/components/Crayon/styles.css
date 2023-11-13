@@ -1,0 +1,24 @@
+  @media screen and (max-width: 700px) {
+    .crayon-grid {
+        border-top: 10px solid #d3ad06;
+        width: 400px;
+        height: 300px;
+        display: flex;
+    }
+}
+
+.create-button {
+    background-color: #055F46;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin: 20px 10px 20px 20px;
+    color: #FFE940;
+}
+
+.create-crayon-form input {
+ background-color: #fff6d0;
+ text-align: center;
+ border-radius: 10px;
+ color: #0C2122;
+ border: 1px solid #d3ae08b1;
+}

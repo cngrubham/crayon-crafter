@@ -25,7 +25,11 @@ app.use(cors());
 // body parser - used for POST/PUT/PATCH routes:
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use((req, res, next) => {
+  console.log("request url", req.originalUrl);
+  console.log("request method", req.method);
+  next();
+});
 /* Mount routes
 ---------------------------------------------------------- */
 app.use("/api/crayon", crayonCtrl);

@@ -1,0 +1,26 @@
+.create-page {
+    background-color: #0c2122;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-container {
+    background-color: white;
+    margin-top: 100px;
+}
+
+.create-box-btn {
+    background-color: #055F46;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin: 20px 10px 20px 20px;
+    color: #FFE940;
+}
+
+.box-input {
+    background-color: #fff6d0;
+    text-align: center;
+    border-radius: 10px;
+    color: #0C2122;
+    border: 1px solid #d3ae08b1;
+}
