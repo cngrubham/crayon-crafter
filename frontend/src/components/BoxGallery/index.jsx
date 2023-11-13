@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BoxComponent from "../Box";
 import { getBoxes } from "../../../utils/backend";
-import "./styles.css"
+import "./styles.css";
 
 const BoxGallery = ({}) => {
   const [boxes, setBoxes] = useState([]);
@@ -10,6 +10,7 @@ const BoxGallery = ({}) => {
     async function fetchBoxes() {
       try {
         const boxesData = await getBoxes();
+        console.log("Fetched Boxes:", boxesData);
         setBoxes(boxesData);
       } catch (error) {
         console.error("Error fetching boxes:", error);
@@ -23,28 +24,30 @@ const BoxGallery = ({}) => {
     try {
       const boxesData = await getBoxes();
       setBoxes(boxesData);
+      console.log("boxesData:", boxesData)
     } catch (error) {
       console.error("Error refreshing boxes:", error);
     }
   };
 
-return (
-  <div className="gallery-page">
-  <h1>All Boxes</h1>
-  <div className="box-gallery">
-    {boxes.map((box) => (
-      <BoxComponent
-        key={box._id}
-        box={box}
-        refreshGallery={refreshGallery}
-        isGalleryPage={true}
-        className="box-component" 
-      />
-    ))}
+  return (
+    <div className="gallery-page">
+      <h1>All Boxes</h1>
+      <div className="box-gallery">
+        {boxes.map(box => {
+          return (
+            <BoxComponent
+              key={box._id}
+              box={box}
+              refreshGallery={refreshGallery}
+              isGalleryPage={true}
+              className="box-component"
+            />
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
 };
-
 
 export default BoxGallery;
