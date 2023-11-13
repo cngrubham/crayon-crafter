@@ -17,6 +17,7 @@ const CrayonComponent = ({
     onCreateCrayon(hexCode, name);
     setCrayonName("");
   };
+  console.log("Selected Crayons:", selectedCrayons);
 
   return (
     <div className="flex flex-col items-center justify-center">

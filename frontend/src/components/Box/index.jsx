@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { deleteBox, updateBox } from "../../../utils/backend";
 import CrayonDisplay from "../CrayonDisplay";
-import CrayonHandle from "../CrayonHandle";
 import "./styles.css";
 
 const BoxComponent = (props) => {
